@@ -1,0 +1,69 @@
+const placeholder = (name: string) => `/images/${name}.svg`
+
+export const site = {
+  name: '[Church Name]',
+  tagline: 'A community learning to follow Jesus together.',
+  hero: { image: placeholder('hero'), subtitle: 'Come Worship God With Us', cta: 'Contact Us' },
+  contact: {
+    venue: '[Church Venue]', address: '[Street Address, City, State]', serviceTime: 'Every Sunday – 10:00am',
+    phone: '[Church Phone Number]', email: '[Church Email Address]', mapUrl: 'https://maps.google.com/?q=Church',
+    mission: 'We want to help people follow Jesus and bring hope to our community through the Bible.',
+    affiliation: '[Church affiliation or network]'
+  },
+  home: {
+    bible: { eyebrow: 'A faith that shapes everyday life', title: 'Use the Bible to Change Your Life', description: '[A brief invitation to explore the Bible and discover how its wisdom speaks to daily life.]', cta: 'Reach out to us' },
+    sermonsEyebrow: 'Watch and listen', moreSermonsLabel: 'More Sermons', seriesEyebrow: 'Sermon series', seriesCta: 'YouTube Sermons',
+    baptism: { eyebrow: 'Life together', title: 'Our Baptisms', description: '[We celebrate each person taking a step of faith and beginning a new chapter.]' },
+    books: { eyebrow: 'Reading material', title: 'Keep learning, one page at a time', description: '[Explore a resource designed to help you grow in understanding and faith.]', featuredLabel: 'Featured book', purchaseLabel: 'Purchase' },
+    leadership: { eyebrow: 'Church leadership', title: 'People who serve with care', description: '[Meet a few of the people helping our community grow in faith.]', cta: 'Meet our leadership', visionReference: '(Matthew 28:19–20 · Colossians 3:16)' }, leaderContactLabel: 'Get in touch',
+    contactBlock: { eyebrow: 'Come say hello', title: 'We would love to meet you', visitLabel: 'Visit us', contactLabel: 'Get in touch', cta: 'Get directions' },
+    featuresEyebrow: 'Take a next step', featuresTitle: 'A place to belong and grow', featuresDescription: '[Whether exploring faith or looking for a church family, there is a next step for you.]',
+    features: [
+      { title: 'Church Gatherings', text: '[Find a welcoming community near you.]', image: placeholder('baptism-1'), to: '/locations' },
+      { title: 'Online Sermons', text: '[Explore messages grounded in the Bible.]', image: placeholder('series'), to: 'https://youtube.com/' },
+      { title: 'Bible Studies', text: '[Ask questions and discover the story of Scripture.]', image: placeholder('book'), to: '/beliefs' },
+      { title: 'Contact Us', text: '[We would love to hear from you.]', image: placeholder('leader-one'), to: '/leadership' }
+    ],
+    locationsTitle: 'Find your community', locationsDescription: '[Discover a local gathering and connect with people in your area.]', gatheringsTitle: 'Gatherings', directionsLabel: 'Google Maps →',
+    beliefsTitle: 'What we believe', beliefsDescription: '[A few convictions that shape how we follow Jesus together.]',
+    leadershipTitle: 'Meet our leadership', leadershipDescription: '[Get to know the people who help guide and serve our church community.]',
+    visitTitle: 'Plan your visit', visitDescription: '[We look forward to welcoming you. Find service details and what to expect below.]',
+    expectTitle: 'What to expect', faqEyebrow: 'Questions?', faqTitle: 'A little more about your visit', faqDescription: '[Here are a few details to help you feel at home when you arrive.]'
+  },
+  socials: [
+    { label: 'Facebook', icon: 'i-simple-icons-facebook', url: 'https://facebook.com/' },
+    { label: 'Instagram', icon: 'i-simple-icons-instagram', url: 'https://instagram.com/' },
+    { label: 'YouTube', icon: 'i-simple-icons-youtube', url: 'https://youtube.com/' }
+  ],
+  regions: [
+    { id: 'central', name: 'Central', groups: ['[Central Campus]', '[Central Professionals]', '[Central Marrieds]'], address: '[Central meeting address]', time: '[Weekly meeting time]' },
+    { id: 'north', name: 'North', groups: ['[North Campus]', '[North Professionals]', '[North Marrieds]'], address: '[North meeting address]', time: '[Weekly meeting time]' },
+    { id: 'west', name: 'West', groups: ['[West Campus]', '[West Professionals]', '[West Marrieds]'], address: '[West meeting address]', time: '[Weekly meeting time]' },
+    { id: 'east', name: 'East', groups: ['[East Campus]', '[East Professionals]', '[East Marrieds]'], address: '[East meeting address]', time: '[Weekly meeting time]' }
+  ],
+  leaders: [
+    { name: '[Pastor Name]', role: 'Lead Pastor', bio: '[A short introduction to the pastor and their heart for the church.]', image: placeholder('leader-one'), email: 'mailto:[pastor-email]' },
+    { name: '[Ministry Leader Name]', role: 'Ministry Leader', bio: '[A short introduction to this leader and the ministry they serve.]', image: placeholder('leader-two'), email: 'mailto:[leader-email]' }
+  ],
+  sermons: { title: 'Latest Sermons', videoId: 'PLACEHOLDER_VIDEO_ID', url: 'https://www.youtube.com/', description: '[Watch a recent message and explore practical teaching from the Bible.]' },
+  series: { title: '[Sermon Series Title]', description: '[A short introduction to this teaching series and the questions it explores.]', image: placeholder('series') },
+  baptismPhotos: Array.from({ length: 8 }, (_, i) => ({ image: placeholder(`baptism-${i + 1}`), alt: `Placeholder baptism photo ${i + 1}` })),
+  book: { title: '[Book Title]', description: '[An accessible introduction to the Bible and a life of faith.]', image: placeholder('book'), quote: '“[A brief placeholder testimonial about this reading material.]”', attribution: '[Reader Name]', url: 'https://example.com/purchase' },
+  beliefs: [
+    { label: 'The Bible', content: '[Placeholder conviction about the Bible as a guide for faith and life.] (2 Timothy 3:16–17)' },
+    { label: 'God and Jesus', content: '[Placeholder conviction about God, Jesus Christ, and the good news.] (John 3:16)' },
+    { label: 'Discipleship', content: '[Placeholder conviction about following Jesus in community.] (Matthew 28:19–20)' },
+    { label: 'The Church', content: '[Placeholder conviction about a welcoming community of faith.] (Ephesians 2:19–22)' }
+  ],
+  expectations: [
+    { label: 'What should I wear?', content: 'Come as you are. [Add a note about the usual dress at your gathering.]' },
+    { label: 'Where can I park?', content: '[Add nearby parking information.]' },
+    { label: 'Can I bring my children?', content: '[Add details about children and family welcome.]' },
+    { label: 'How long is the service?', content: '[Add the typical service length and what to expect.]' }
+  ],
+  faqs: [
+    { label: 'Do I need to let you know I am coming?', content: '[Add any guidance about planning a first visit.]' },
+    { label: 'Can I speak with someone before Sunday?', content: '[Add the best way for visitors to get in touch before attending.]' },
+    { label: 'Is the building accessible?', content: '[Add accessibility and accommodation information.]' }
+  ]
+} as const

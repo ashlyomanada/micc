@@ -1,0 +1,1851 @@
+import { t as components_default } from "./components-DxzSx7d2.js";
+import { s as useNuxtApp } from "./head-rFsGK3Ox.js";
+import { g as useRoute } from "./utils-CdhFP_jx.js";
+import { t as useAppConfig } from "./config-CAn_Nf-x.js";
+import { c as omit, d as Slot, f as useForwardProps, l as resolveAs, n as useForwardProps$1, r as useComponentProps, s as mergeClasses, t as tv, u as Primitive } from "./tv-CMuosA3a.js";
+import "./ready-C4lfWLOw.js";
+import { t as NuxtLink } from "./nuxt-link-C7rfVfaB.js";
+import { computed, createBlock, createCommentVNode, createTextVNode, createVNode, defineComponent, getCurrentInstance, inject, mergeModels, mergeProps, openBlock, provide, ref, renderSlot, resolveDynamicComponent, toDisplayString, toValue, unref, useModel, useSSRContext, useSlots, watch, withCtx } from "vue";
+import { hasProtocol } from "/Users/ccci/Project/node_modules/ufo/dist/index.mjs";
+import { defu as defu$1 } from "/Users/ccci/Project/node_modules/defu/dist/defu.mjs";
+import { ssrInterpolate, ssrRenderClass, ssrRenderComponent, ssrRenderSlot, ssrRenderVNode } from "vue/server-renderer";
+import { reactiveOmit, reactivePick } from "/Users/ccci/Project/node_modules/@vueuse/core/dist/index.js";
+import { diff, isEqual } from "/Users/ccci/Project/node_modules/ohash/dist/utils/index.mjs";
+// node_modules/@nuxt/ui/dist/runtime/composables/useComponentIcons.js
+function useComponentIcons(componentProps) {
+	const appConfig = useAppConfig();
+	const props = computed(() => toValue(componentProps));
+	const isLeading = computed(() => props.value.icon && props.value.leading || props.value.icon && !props.value.trailing || props.value.loading && !props.value.trailing || !!props.value.leadingIcon);
+	return {
+		isLeading,
+		isTrailing: computed(() => props.value.icon && props.value.trailing || props.value.loading && props.value.trailing && !isLeading.value || !!props.value.trailingIcon && props.value.trailing !== false),
+		leadingIconName: computed(() => {
+			if (props.value.loading) return props.value.loadingIcon || appConfig.ui.icons.loading;
+			return props.value.leadingIcon || props.value.icon;
+		}),
+		trailingIconName: computed(() => {
+			if (props.value.loading && !isLeading.value) return props.value.loadingIcon || appConfig.ui.icons.loading;
+			return props.value.trailingIcon || props.value.icon;
+		})
+	};
+}
+// node_modules/@nuxt/ui/dist/runtime/composables/useFieldGroup.js
+var fieldGroupInjectionKey = Symbol("nuxt-ui.field-group");
+function useFieldGroup(props) {
+	const fieldGroup = inject(fieldGroupInjectionKey, void 0);
+	return {
+		orientation: computed(() => fieldGroup?.value.orientation),
+		size: computed(() => props?.size ?? fieldGroup?.value.size)
+	};
+}
+var FieldGroupReset = defineComponent({
+	name: "FieldGroupReset",
+	setup(_, { slots }) {
+		provide(fieldGroupInjectionKey, computed(() => ({
+			size: void 0,
+			orientation: void 0
+		})));
+		return () => slots.default?.();
+	}
+});
+// node_modules/@nuxt/ui/dist/runtime/composables/useFormField.js
+var formLoadingInjectionKey = Symbol("nuxt-ui.form-loading");
+// node_modules/@nuxt/ui/dist/runtime/utils/link.js
+var linkKeySet = /* @__PURE__ */ new Set([
+	"active",
+	"activeClass",
+	"ariaCurrentValue",
+	"as",
+	"disabled",
+	"download",
+	"exact",
+	"exactActiveClass",
+	"exactHash",
+	"exactQuery",
+	"external",
+	"form",
+	"formaction",
+	"formenctype",
+	"formmethod",
+	"formnovalidate",
+	"formtarget",
+	"href",
+	"hreflang",
+	"inactiveClass",
+	"locale",
+	"media",
+	"noPrefetch",
+	"noRel",
+	"onClick",
+	"ping",
+	"prefetch",
+	"prefetchOn",
+	"prefetchedClass",
+	"referrerpolicy",
+	"rel",
+	"replace",
+	"target",
+	"title",
+	"to",
+	"trailingSlash",
+	"type",
+	"viewTransition"
+]);
+function pickLinkProps(link) {
+	const picked = {};
+	for (const key of Object.keys(link)) if (linkKeySet.has(key) || key.startsWith("aria-") || key.startsWith("data-")) picked[key] = link[key];
+	return picked;
+}
+function isPartiallyEqual(item1, item2) {
+	const diffedKeys = diff(item1, item2).reduce((filtered, q) => {
+		if (q.type === "added") filtered.add(q.key);
+		return filtered;
+	}, /* @__PURE__ */ new Set());
+	const item1Filtered = Object.fromEntries(Object.entries(item1).filter(([key]) => !diffedKeys.has(key)));
+	const item2Filtered = Object.fromEntries(Object.entries(item2).filter(([key]) => !diffedKeys.has(key)));
+	return isEqual(item1Filtered, item2Filtered);
+}
+// node_modules/@nuxt/ui/dist/runtime/components/Icon.vue
+var _sfc_main$5 = {
+	__name: "UIcon",
+	__ssrInlineRender: true,
+	props: {
+		name: {
+			type: null,
+			required: true
+		},
+		mode: {
+			type: String,
+			required: false
+		},
+		size: {
+			type: [String, Number],
+			required: false
+		},
+		customize: {
+			type: [
+				Function,
+				Boolean,
+				null
+			],
+			required: false
+		}
+	},
+	setup(__props) {
+		const iconProps = useForwardProps(reactivePick(__props, "mode", "size", "customize"));
+		return (_ctx, _push, _parent, _attrs) => {
+			if (typeof __props.name === "string") _push(ssrRenderComponent(unref(components_default), mergeProps({ name: __props.name }, unref(iconProps), _attrs), null, _parent));
+			else ssrRenderVNode(_push, createVNode(resolveDynamicComponent(__props.name), _attrs, null), _parent);
+		};
+	}
+};
+var _sfc_setup$5 = _sfc_main$5.setup;
+_sfc_main$5.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/Icon.vue");
+	return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
+};
+// node_modules/@nuxt/ui/dist/runtime/composables/useAvatarGroup.js
+var avatarGroupInjectionKey = Symbol("nuxt-ui.avatar-group");
+function useAvatarGroup(props) {
+	const avatarGroup = inject(avatarGroupInjectionKey, void 0);
+	const size = computed(() => props.size ?? avatarGroup?.value.size);
+	const color = computed(() => props.color ?? avatarGroup?.value.color);
+	provide(avatarGroupInjectionKey, computed(() => ({
+		size: size.value,
+		color: color.value
+	})));
+	return {
+		size,
+		color
+	};
+}
+// virtual:nuxt:.nuxt%2Fui%2Fchip.ts
+var virtual_nuxt__nuxt_2Fui_2Fchip_default = {
+	"slots": {
+		"root": "relative inline-flex items-center justify-center shrink-0",
+		"base": "rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap"
+	},
+	"variants": {
+		"color": {
+			"primary": "bg-primary",
+			"secondary": "bg-secondary",
+			"success": "bg-success",
+			"info": "bg-info",
+			"warning": "bg-warning",
+			"error": "bg-error",
+			"neutral": "bg-inverted"
+		},
+		"size": {
+			"3xs": "h-[4px] min-w-[4px] text-[4px]",
+			"2xs": "h-[5px] min-w-[5px] text-[5px]",
+			"xs": "h-[6px] min-w-[6px] text-[6px]",
+			"sm": "h-[7px] min-w-[7px] text-[7px]",
+			"md": "h-[8px] min-w-[8px] text-[8px]",
+			"lg": "h-[9px] min-w-[9px] text-[9px]",
+			"xl": "h-[10px] min-w-[10px] text-[10px]",
+			"2xl": "h-[11px] min-w-[11px] text-[11px]",
+			"3xl": "h-[12px] min-w-[12px] text-[12px]"
+		},
+		"position": {
+			"top-right": "top-0 right-0",
+			"bottom-right": "bottom-0 right-0",
+			"top-left": "top-0 left-0",
+			"bottom-left": "bottom-0 left-0"
+		},
+		"inset": { "false": "" },
+		"standalone": { "false": "absolute" }
+	},
+	"compoundVariants": [
+		{
+			"position": "top-right",
+			"inset": false,
+			"class": "-translate-y-1/2 translate-x-1/2 transform"
+		},
+		{
+			"position": "bottom-right",
+			"inset": false,
+			"class": "translate-y-1/2 translate-x-1/2 transform"
+		},
+		{
+			"position": "top-left",
+			"inset": false,
+			"class": "-translate-y-1/2 -translate-x-1/2 transform"
+		},
+		{
+			"position": "bottom-left",
+			"inset": false,
+			"class": "translate-y-1/2 -translate-x-1/2 transform"
+		}
+	],
+	"defaultVariants": {
+		"size": "md",
+		"color": "primary",
+		"position": "top-right"
+	}
+};
+// node_modules/@nuxt/ui/dist/runtime/components/Chip.vue
+var _sfc_main$4 = /*@__PURE__*/ Object.assign({ inheritAttrs: false }, {
+	__name: "UChip",
+	__ssrInlineRender: true,
+	props: /*@__PURE__*/ mergeModels({
+		as: {
+			type: null,
+			required: false
+		},
+		text: {
+			type: [String, Number],
+			required: false
+		},
+		color: {
+			type: null,
+			required: false
+		},
+		size: {
+			type: null,
+			required: false
+		},
+		position: {
+			type: null,
+			required: false
+		},
+		inset: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		standalone: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		class: {
+			type: null,
+			required: false
+		},
+		ui: {
+			type: Object,
+			required: false
+		}
+	}, {
+		"show": {
+			type: Boolean,
+			default: true
+		},
+		"showModifiers": {}
+	}),
+	emits: ["update:show"],
+	setup(__props) {
+		const _props = __props;
+		const props = useComponentProps("chip", _props);
+		const show = useModel(__props, "show", {
+			type: Boolean,
+			default: true
+		});
+		const { size } = useAvatarGroup(_props);
+		const appConfig = useAppConfig();
+		const ui = computed(() => tv({
+			extend: virtual_nuxt__nuxt_2Fui_2Fchip_default,
+			...appConfig.ui?.chip || {}
+		})({
+			color: props.color,
+			size: size.value ?? props.size,
+			position: props.position,
+			inset: props.inset,
+			standalone: props.standalone
+		}));
+		return (_ctx, _push, _parent, _attrs) => {
+			_push(ssrRenderComponent(unref(Primitive), mergeProps({
+				as: unref(props).as,
+				"data-slot": _ctx.$attrs["data-slot"] ?? "root",
+				class: ui.value.root({ class: [unref(props).ui?.root, unref(props).class] })
+			}, _attrs), {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) {
+						_push(ssrRenderComponent(unref(Slot), {
+							..._ctx.$attrs,
+							"data-slot": void 0
+						}, {
+							default: withCtx((_, _push, _parent, _scopeId) => {
+								if (_push) ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent, _scopeId);
+								else return [renderSlot(_ctx.$slots, "default")];
+							}),
+							_: 3
+						}, _parent, _scopeId));
+						if (show.value) {
+							_push(`<span data-slot="base" class="${ssrRenderClass(ui.value.base({ class: unref(props).ui?.base }))}"${_scopeId}>`);
+							ssrRenderSlot(_ctx.$slots, "content", {}, () => {
+								_push(`${ssrInterpolate(unref(props).text)}`);
+							}, _push, _parent, _scopeId);
+							_push(`</span>`);
+						} else _push(`<!---->`);
+					} else return [createVNode(unref(Slot), {
+						..._ctx.$attrs,
+						"data-slot": void 0
+					}, {
+						default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+						_: 3
+					}, 16), show.value ? (openBlock(), createBlock("span", {
+						key: 0,
+						"data-slot": "base",
+						class: ui.value.base({ class: unref(props).ui?.base })
+					}, [renderSlot(_ctx.$slots, "content", {}, () => [createTextVNode(toDisplayString(unref(props).text), 1)])], 2)) : createCommentVNode("", true)];
+				}),
+				_: 3
+			}, _parent));
+		};
+	}
+});
+var _sfc_setup$4 = _sfc_main$4.setup;
+_sfc_main$4.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/Chip.vue");
+	return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
+};
+// virtual:nuxt:.nuxt%2Fui%2Favatar.ts
+var virtual_nuxt__nuxt_2Fui_2Favatar_default = {
+	"slots": {
+		"root": "inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle",
+		"image": "h-full w-full rounded-[inherit] object-cover",
+		"fallback": "font-medium truncate",
+		"icon": "shrink-0"
+	},
+	"variants": {
+		"color": {
+			"primary": {
+				"root": "bg-primary/10",
+				"fallback": "text-primary",
+				"icon": "text-primary"
+			},
+			"secondary": {
+				"root": "bg-secondary/10",
+				"fallback": "text-secondary",
+				"icon": "text-secondary"
+			},
+			"success": {
+				"root": "bg-success/10",
+				"fallback": "text-success",
+				"icon": "text-success"
+			},
+			"info": {
+				"root": "bg-info/10",
+				"fallback": "text-info",
+				"icon": "text-info"
+			},
+			"warning": {
+				"root": "bg-warning/10",
+				"fallback": "text-warning",
+				"icon": "text-warning"
+			},
+			"error": {
+				"root": "bg-error/10",
+				"fallback": "text-error",
+				"icon": "text-error"
+			},
+			"neutral": {
+				"root": "bg-elevated",
+				"fallback": "text-muted",
+				"icon": "text-muted"
+			}
+		},
+		"size": {
+			"3xs": { "root": "size-4 text-[8px]" },
+			"2xs": { "root": "size-5 text-[10px]" },
+			"xs": { "root": "size-6 text-xs" },
+			"sm": { "root": "size-7 text-sm" },
+			"md": { "root": "size-8 text-base" },
+			"lg": { "root": "size-9 text-lg" },
+			"xl": { "root": "size-10 text-xl" },
+			"2xl": { "root": "size-11 text-[22px]" },
+			"3xl": { "root": "size-12 text-2xl" }
+		}
+	},
+	"defaultVariants": {
+		"size": "md",
+		"color": "neutral"
+	}
+};
+// node_modules/@nuxt/ui/dist/runtime/components/Avatar.vue
+var _sfc_main$3 = /*@__PURE__*/ Object.assign({ inheritAttrs: false }, {
+	__name: "UAvatar",
+	__ssrInlineRender: true,
+	props: {
+		as: {
+			type: null,
+			required: false
+		},
+		src: {
+			type: String,
+			required: false
+		},
+		alt: {
+			type: String,
+			required: false
+		},
+		icon: {
+			type: null,
+			required: false
+		},
+		text: {
+			type: String,
+			required: false
+		},
+		size: {
+			type: null,
+			required: false
+		},
+		color: {
+			type: null,
+			required: false
+		},
+		chip: {
+			type: [Boolean, Object],
+			required: false
+		},
+		class: {
+			type: null,
+			required: false
+		},
+		style: {
+			type: null,
+			required: false
+		},
+		ui: {
+			type: Object,
+			required: false
+		}
+	},
+	setup(__props) {
+		const _props = __props;
+		const props = useComponentProps("avatar", _props);
+		const as = computed(() => resolveAs(props.as, { root: "span" }));
+		const fallback = computed(() => props.text || (props.alt || "").split(" ").map((word) => word.charAt(0)).join("").substring(0, 2));
+		const appConfig = useAppConfig();
+		const { size, color } = useAvatarGroup(_props);
+		const ui = computed(() => tv({
+			extend: virtual_nuxt__nuxt_2Fui_2Favatar_default,
+			...appConfig.ui?.avatar || {}
+		})({
+			size: size.value ?? props.size,
+			color: color.value ?? props.color
+		}));
+		const rootClass = computed(() => ui.value.root({ class: [props.ui?.root, props.class] }));
+		const sizePx = computed(() => {
+			const sizeClass = (rootClass.value || "").split(" ").find((c) => /^size-\d+$/.test(c));
+			if (sizeClass) {
+				const num = Number.parseFloat(sizeClass.split("-")[1] ?? "");
+				if (!Number.isNaN(num)) return num * 4;
+			}
+			return null;
+		});
+		const error = ref(false);
+		watch(() => props.src, () => {
+			if (error.value) error.value = false;
+		});
+		function onError() {
+			error.value = true;
+		}
+		return (_ctx, _push, _parent, _attrs) => {
+			ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(props).chip ? _sfc_main$4 : unref(Primitive)), mergeProps({ as: as.value.root }, unref(props).chip ? typeof unref(props).chip === "object" ? {
+				inset: true,
+				...unref(props).chip
+			} : { inset: true } : {}, {
+				"data-slot": _ctx.$attrs["data-slot"] ?? "root",
+				class: rootClass.value,
+				style: unref(props).style
+			}, _attrs), {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) {
+						if (unref(props).src && !error.value) ssrRenderVNode(_push, createVNode(resolveDynamicComponent(as.value.img || unref("img")), mergeProps({
+							src: unref(props).src,
+							alt: unref(props).alt,
+							width: sizePx.value,
+							height: sizePx.value
+						}, _ctx.$attrs, {
+							"data-slot": "image",
+							class: ui.value.image({ class: unref(props).ui?.image }),
+							onError
+						}), null), _parent, _scopeId);
+						else _push(ssrRenderComponent(unref(Slot), {
+							..._ctx.$attrs,
+							"data-slot": void 0
+						}, {
+							default: withCtx((_, _push, _parent, _scopeId) => {
+								if (_push) ssrRenderSlot(_ctx.$slots, "default", {}, () => {
+									if (unref(props).icon) _push(ssrRenderComponent(_sfc_main$5, {
+										name: unref(props).icon,
+										"data-slot": "icon",
+										class: ui.value.icon({ class: unref(props).ui?.icon })
+									}, null, _parent, _scopeId));
+									else _push(`<span data-slot="fallback" class="${ssrRenderClass(ui.value.fallback({ class: unref(props).ui?.fallback }))}"${_scopeId}>${ssrInterpolate(fallback.value || "\xA0")}</span>`);
+								}, _push, _parent, _scopeId);
+								else return [renderSlot(_ctx.$slots, "default", {}, () => [unref(props).icon ? (openBlock(), createBlock(_sfc_main$5, {
+									key: 0,
+									name: unref(props).icon,
+									"data-slot": "icon",
+									class: ui.value.icon({ class: unref(props).ui?.icon })
+								}, null, 8, ["name", "class"])) : (openBlock(), createBlock("span", {
+									key: 1,
+									"data-slot": "fallback",
+									class: ui.value.fallback({ class: unref(props).ui?.fallback })
+								}, toDisplayString(fallback.value || "\xA0"), 3))])];
+							}),
+							_: 3
+						}, _parent, _scopeId));
+					} else return [unref(props).src && !error.value ? (openBlock(), createBlock(resolveDynamicComponent(as.value.img || unref("img")), mergeProps({
+						key: 0,
+						src: unref(props).src,
+						alt: unref(props).alt,
+						width: sizePx.value,
+						height: sizePx.value
+					}, _ctx.$attrs, {
+						"data-slot": "image",
+						class: ui.value.image({ class: unref(props).ui?.image }),
+						onError
+					}), null, 16, [
+						"src",
+						"alt",
+						"width",
+						"height",
+						"class"
+					])) : (openBlock(), createBlock(unref(Slot), mergeProps({ key: 1 }, {
+						..._ctx.$attrs,
+						"data-slot": void 0
+					}), {
+						default: withCtx(() => [renderSlot(_ctx.$slots, "default", {}, () => [unref(props).icon ? (openBlock(), createBlock(_sfc_main$5, {
+							key: 0,
+							name: unref(props).icon,
+							"data-slot": "icon",
+							class: ui.value.icon({ class: unref(props).ui?.icon })
+						}, null, 8, ["name", "class"])) : (openBlock(), createBlock("span", {
+							key: 1,
+							"data-slot": "fallback",
+							class: ui.value.fallback({ class: unref(props).ui?.fallback })
+						}, toDisplayString(fallback.value || "\xA0"), 3))])]),
+						_: 3
+					}, 16))];
+				}),
+				_: 3
+			}), _parent);
+		};
+	}
+});
+var _sfc_setup$3 = _sfc_main$3.setup;
+_sfc_main$3.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/Avatar.vue");
+	return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
+};
+// node_modules/@nuxt/ui/dist/runtime/components/LinkBase.vue
+var _sfc_main$2 = {
+	__name: "ULinkBase",
+	__ssrInlineRender: true,
+	props: {
+		as: {
+			type: String,
+			required: false,
+			default: "button"
+		},
+		type: {
+			type: String,
+			required: false,
+			default: "button"
+		},
+		disabled: {
+			type: Boolean,
+			required: false
+		},
+		onClick: {
+			type: [Function, Array],
+			required: false
+		},
+		href: {
+			type: [String, null],
+			required: false
+		},
+		navigate: {
+			type: Function,
+			required: false
+		},
+		target: {
+			type: [
+				String,
+				Object,
+				null
+			],
+			required: false
+		},
+		rel: {
+			type: [
+				String,
+				Object,
+				null
+			],
+			required: false
+		},
+		active: {
+			type: Boolean,
+			required: false
+		},
+		isExternal: {
+			type: Boolean,
+			required: false
+		}
+	},
+	setup(__props) {
+		const props = __props;
+		function onClickWrapper(e) {
+			if (props.disabled) {
+				e.stopPropagation();
+				e.preventDefault();
+				return;
+			}
+			const results = [];
+			if (props.onClick) for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) results.push(onClick(e));
+			if (props.href && props.navigate && !props.isExternal) props.navigate(e);
+			return Promise.all(results);
+		}
+		return (_ctx, _push, _parent, _attrs) => {
+			_push(ssrRenderComponent(unref(Primitive), mergeProps(__props.href ? {
+				"as": "a",
+				"href": __props.disabled ? void 0 : __props.href,
+				"aria-disabled": __props.disabled ? "true" : void 0,
+				"role": __props.disabled ? "link" : void 0,
+				"tabindex": __props.disabled ? -1 : void 0
+			} : __props.as === "button" ? {
+				as: __props.as,
+				type: __props.type,
+				disabled: __props.disabled
+			} : { as: __props.as }, {
+				rel: __props.rel,
+				target: __props.target,
+				onClick: onClickWrapper
+			}, _attrs), {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent, _scopeId);
+					else return [renderSlot(_ctx.$slots, "default")];
+				}),
+				_: 3
+			}, _parent));
+		};
+	}
+};
+var _sfc_setup$2 = _sfc_main$2.setup;
+_sfc_main$2.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/LinkBase.vue");
+	return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
+};
+// virtual:nuxt:.nuxt%2Fui%2Flink.ts
+var virtual_nuxt__nuxt_2Fui_2Flink_default = {
+	"base": "outline-primary/25 focus-visible:outline-3 rounded-md",
+	"variants": {
+		"active": {
+			"true": "text-primary",
+			"false": "text-muted"
+		},
+		"disabled": { "true": "cursor-not-allowed opacity-75" }
+	},
+	"compoundVariants": [{
+		"active": false,
+		"disabled": false,
+		"class": ["hover:text-default", "transition-colors"]
+	}]
+};
+// node_modules/@nuxt/ui/dist/runtime/components/Link.vue
+var _sfc_main$1 = /*@__PURE__*/ Object.assign({ inheritAttrs: false }, {
+	__name: "ULink",
+	__ssrInlineRender: true,
+	props: {
+		as: {
+			type: null,
+			required: false,
+			default: "button"
+		},
+		type: {
+			type: null,
+			required: false,
+			default: "button"
+		},
+		disabled: {
+			type: Boolean,
+			required: false
+		},
+		active: {
+			type: Boolean,
+			required: false,
+			default: void 0
+		},
+		exact: {
+			type: Boolean,
+			required: false
+		},
+		exactQuery: {
+			type: [Boolean, String],
+			required: false
+		},
+		exactHash: {
+			type: Boolean,
+			required: false
+		},
+		inactiveClass: {
+			type: String,
+			required: false
+		},
+		custom: {
+			type: Boolean,
+			required: false
+		},
+		raw: {
+			type: Boolean,
+			required: false
+		},
+		locale: {
+			type: [Boolean, String],
+			required: false,
+			default: void 0
+		},
+		class: {
+			type: null,
+			required: false
+		},
+		to: {
+			type: null,
+			required: false
+		},
+		href: {
+			type: null,
+			required: false
+		},
+		external: {
+			type: Boolean,
+			required: false
+		},
+		target: {
+			type: [
+				String,
+				Object,
+				null
+			],
+			required: false
+		},
+		rel: {
+			type: [
+				String,
+				Object,
+				null
+			],
+			required: false
+		},
+		noRel: {
+			type: Boolean,
+			required: false
+		},
+		prefetchedClass: {
+			type: String,
+			required: false
+		},
+		prefetch: {
+			type: Boolean,
+			required: false
+		},
+		prefetchOn: {
+			type: [String, Object],
+			required: false
+		},
+		noPrefetch: {
+			type: Boolean,
+			required: false
+		},
+		trailingSlash: {
+			type: String,
+			required: false
+		},
+		activeClass: {
+			type: String,
+			required: false
+		},
+		exactActiveClass: {
+			type: String,
+			required: false
+		},
+		ariaCurrentValue: {
+			type: String,
+			required: false,
+			default: "page"
+		},
+		viewTransition: {
+			type: Boolean,
+			required: false
+		},
+		replace: {
+			type: Boolean,
+			required: false
+		}
+	},
+	setup(__props) {
+		const props = __props;
+		const route = useRoute();
+		const appConfig = useAppConfig();
+		const nuxtApp = useNuxtApp();
+		const nuxtLinkProps = useForwardProps(reactiveOmit(props, "as", "type", "disabled", "active", "exact", "exactQuery", "exactHash", "activeClass", "inactiveClass", "to", "href", "raw", "custom", "locale", "class"));
+		const ui = computed(() => tv({
+			extend: virtual_nuxt__nuxt_2Fui_2Flink_default,
+			...defu$1({ variants: { active: {
+				true: mergeClasses(appConfig.ui?.link?.variants?.active?.true, props.activeClass),
+				false: mergeClasses(appConfig.ui?.link?.variants?.active?.false, props.inactiveClass)
+			} } }, appConfig.ui?.link || {})
+		}));
+		const to = computed(() => {
+			const path = props.to ?? props.href;
+			if (!path) return path;
+			if (typeof path !== "string") return path;
+			if (props.external || hasProtocol(path, { acceptRelative: true })) return path;
+			if (props.locale === false) return path;
+			const localePath = nuxtApp.$localePath;
+			if (!localePath) return path;
+			const codes = nuxtApp.$i18n?.localeCodes?.value;
+			if (codes?.length && new RegExp(`^/(${codes.join("|")})($|[/?#])`).test(path)) return path;
+			return localePath(path, typeof props.locale === "string" ? props.locale : void 0) || path;
+		});
+		const isInternalLink = computed(() => {
+			if (!to.value) return false;
+			if (props.external) return false;
+			if (typeof to.value !== "string") return true;
+			if (hasProtocol(to.value, { acceptRelative: true })) return false;
+			if (props.target && props.target !== "_self") return false;
+			return true;
+		});
+		const rel = computed(() => {
+			if (props.noRel) return null;
+			if (props.rel !== void 0) return props.rel || null;
+			if (!isInternalLink.value || props.target && props.target !== "_self") return "noopener noreferrer";
+			return null;
+		});
+		function isLinkActive({ route: linkRoute, isActive, isExactActive } = {}) {
+			if (props.active !== void 0) return props.active;
+			if (!to.value) return false;
+			if (props.exactQuery === "partial") {
+				if (!isPartiallyEqual(linkRoute.query, route.query)) return false;
+			} else if (props.exactQuery === true) {
+				if (!isEqual(linkRoute.query, route.query)) return false;
+			}
+			if (props.exactHash && linkRoute.hash !== route.hash) return false;
+			if (props.exact && isExactActive) return true;
+			if (!props.exact && isActive) return true;
+			return false;
+		}
+		function resolveLinkClass({ route: route2, isActive, isExactActive, prefetched } = {}) {
+			const active = isLinkActive({
+				route: route2,
+				isActive,
+				isExactActive
+			});
+			const prefetchedClass = prefetched ? props.prefetchedClass : void 0;
+			if (props.raw) return [
+				props.class,
+				active ? props.activeClass : props.inactiveClass,
+				prefetchedClass
+			];
+			return ui.value({
+				class: prefetchedClass ? [props.class, prefetchedClass] : props.class,
+				active,
+				disabled: props.disabled
+			});
+		}
+		getCurrentInstance();
+		let prefetchApi;
+		function onPrefetch() {
+			prefetchApi?.prefetch?.(nuxtApp);
+		}
+		function onInteraction() {
+			if (!prefetchApi?.prefetched) {
+				if (prefetchApi?.shouldPrefetch?.("interaction")) onPrefetch();
+				return;
+			}
+			if (prefetchApi.fullPath === void 0) return;
+			const { pathname, search } = new URL(prefetchApi.fullPath, (void 0).location.href);
+			nuxtApp._prefetch?.promote?.(pathname + search);
+		}
+		function getPrefetchListeners({ prefetch, shouldPrefetch, prefetched, isExternal }, attrs, linkRoute) {
+			if (!prefetch || !shouldPrefetch) return;
+			prefetchApi = {
+				prefetch,
+				shouldPrefetch,
+				prefetched,
+				fullPath: isExternal ? void 0 : linkRoute?.fullPath
+			};
+			if (!prefetched && !shouldPrefetch("interaction")) return;
+			return mergeProps({
+				onPointerenter: attrs.onPointerenter,
+				onFocus: attrs.onFocus,
+				onPointerdown: attrs.onPointerdown
+			}, {
+				onPointerenter: onInteraction,
+				onFocus: onInteraction,
+				onPointerdown: onInteraction
+			});
+		}
+		return (_ctx, _push, _parent, _attrs) => {
+			const _component_NuxtLink = NuxtLink;
+			if (isInternalLink.value) _push(ssrRenderComponent(_component_NuxtLink, mergeProps(unref(nuxtLinkProps), {
+				to: to.value,
+				custom: ""
+			}, _attrs), {
+				default: withCtx(({ href, navigate, route: linkRoute, isActive, isExactActive, ...rest }, _push, _parent, _scopeId) => {
+					if (_push) {
+						if (__props.custom) _push(ssrRenderComponent(unref(Slot), null, {
+							default: withCtx((_, _push, _parent, _scopeId) => {
+								if (_push) ssrRenderSlot(_ctx.$slots, "default", {
+									..._ctx.$attrs,
+									...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+									...rest.prefetched && __props.prefetchedClass ? { class: __props.prefetchedClass } : {},
+									...getPrefetchListeners(rest, _ctx.$attrs, linkRoute),
+									as: __props.as,
+									type: __props.type,
+									disabled: __props.disabled,
+									href,
+									navigate,
+									rel: rel.value,
+									target: rest.target,
+									isExternal: rest.isExternal,
+									active: isLinkActive({
+										route: linkRoute,
+										isActive,
+										isExactActive
+									})
+								}, null, _push, _parent, _scopeId);
+								else return [renderSlot(_ctx.$slots, "default", {
+									..._ctx.$attrs,
+									...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+									...rest.prefetched && __props.prefetchedClass ? { class: __props.prefetchedClass } : {},
+									...getPrefetchListeners(rest, _ctx.$attrs, linkRoute),
+									as: __props.as,
+									type: __props.type,
+									disabled: __props.disabled,
+									href,
+									navigate,
+									rel: rel.value,
+									target: rest.target,
+									isExternal: rest.isExternal,
+									active: isLinkActive({
+										route: linkRoute,
+										isActive,
+										isExactActive
+									})
+								})];
+							}),
+							_: 2
+						}, _parent, _scopeId));
+						else _push(ssrRenderComponent(_sfc_main$2, mergeProps({
+							..._ctx.$attrs,
+							...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+							as: __props.as,
+							type: __props.type,
+							disabled: __props.disabled,
+							href,
+							navigate,
+							rel: rel.value,
+							target: rest.target,
+							isExternal: rest.isExternal,
+							...getPrefetchListeners(rest, _ctx.$attrs, linkRoute)
+						}, { class: resolveLinkClass({
+							route: linkRoute,
+							isActive,
+							isExactActive,
+							prefetched: rest.prefetched
+						}) }), {
+							default: withCtx((_, _push, _parent, _scopeId) => {
+								if (_push) ssrRenderSlot(_ctx.$slots, "default", { active: isLinkActive({
+									route: linkRoute,
+									isActive,
+									isExactActive
+								}) }, null, _push, _parent, _scopeId);
+								else return [renderSlot(_ctx.$slots, "default", { active: isLinkActive({
+									route: linkRoute,
+									isActive,
+									isExactActive
+								}) })];
+							}),
+							_: 2
+						}, _parent, _scopeId));
+					} else return [__props.custom ? (openBlock(), createBlock(unref(Slot), { key: 0 }, {
+						default: withCtx(() => [renderSlot(_ctx.$slots, "default", {
+							..._ctx.$attrs,
+							...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+							...rest.prefetched && __props.prefetchedClass ? { class: __props.prefetchedClass } : {},
+							...getPrefetchListeners(rest, _ctx.$attrs, linkRoute),
+							as: __props.as,
+							type: __props.type,
+							disabled: __props.disabled,
+							href,
+							navigate,
+							rel: rel.value,
+							target: rest.target,
+							isExternal: rest.isExternal,
+							active: isLinkActive({
+								route: linkRoute,
+								isActive,
+								isExactActive
+							})
+						})]),
+						_: 2
+					}, 1024)) : (openBlock(), createBlock(_sfc_main$2, mergeProps({ key: 1 }, {
+						..._ctx.$attrs,
+						...__props.exact && isExactActive ? { "aria-current": props.ariaCurrentValue } : {},
+						as: __props.as,
+						type: __props.type,
+						disabled: __props.disabled,
+						href,
+						navigate,
+						rel: rel.value,
+						target: rest.target,
+						isExternal: rest.isExternal,
+						...getPrefetchListeners(rest, _ctx.$attrs, linkRoute)
+					}, { class: resolveLinkClass({
+						route: linkRoute,
+						isActive,
+						isExactActive,
+						prefetched: rest.prefetched
+					}) }), {
+						default: withCtx(() => [renderSlot(_ctx.$slots, "default", { active: isLinkActive({
+							route: linkRoute,
+							isActive,
+							isExactActive
+						}) })]),
+						_: 2
+					}, 1040, ["class"]))];
+				}),
+				_: 3
+			}, _parent));
+			else if (__props.custom) _push(ssrRenderComponent(unref(Slot), _attrs, {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) ssrRenderSlot(_ctx.$slots, "default", {
+						..._ctx.$attrs,
+						as: __props.as,
+						type: __props.type,
+						disabled: __props.disabled,
+						...to.value ? {
+							href: String(to.value),
+							target: props.target,
+							rel: rel.value,
+							isExternal: true
+						} : {},
+						active: __props.active ?? false
+					}, null, _push, _parent, _scopeId);
+					else return [renderSlot(_ctx.$slots, "default", {
+						..._ctx.$attrs,
+						as: __props.as,
+						type: __props.type,
+						disabled: __props.disabled,
+						...to.value ? {
+							href: String(to.value),
+							target: props.target,
+							rel: rel.value,
+							isExternal: true
+						} : {},
+						active: __props.active ?? false
+					})];
+				}),
+				_: 3
+			}, _parent));
+			else _push(ssrRenderComponent(_sfc_main$2, mergeProps({
+				..._ctx.$attrs,
+				as: __props.as,
+				type: __props.type,
+				disabled: __props.disabled,
+				...to.value ? {
+					href: String(to.value),
+					target: props.target,
+					rel: rel.value,
+					isExternal: true
+				} : {}
+			}, { class: resolveLinkClass() }, _attrs), {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) ssrRenderSlot(_ctx.$slots, "default", { active: __props.active ?? false }, null, _push, _parent, _scopeId);
+					else return [renderSlot(_ctx.$slots, "default", { active: __props.active ?? false })];
+				}),
+				_: 3
+			}, _parent));
+		};
+	}
+});
+var _sfc_setup$1 = _sfc_main$1.setup;
+_sfc_main$1.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/Link.vue");
+	return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
+};
+// virtual:nuxt:.nuxt%2Fui%2Fbutton.ts
+var virtual_nuxt__nuxt_2Fui_2Fbutton_default = {
+	"slots": {
+		"base": ["rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75", "transition-colors"],
+		"label": "truncate",
+		"leadingIcon": "shrink-0",
+		"leadingAvatar": "shrink-0",
+		"leadingAvatarSize": "",
+		"trailingIcon": "shrink-0"
+	},
+	"variants": {
+		"fieldGroup": {
+			"horizontal": "not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]",
+			"vertical": "not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]"
+		},
+		"color": {
+			"primary": "",
+			"secondary": "",
+			"success": "",
+			"info": "",
+			"warning": "",
+			"error": "",
+			"neutral": ""
+		},
+		"variant": {
+			"solid": "",
+			"outline": "",
+			"soft": "",
+			"subtle": "",
+			"ghost": "",
+			"link": ""
+		},
+		"size": {
+			"xs": {
+				"base": "px-2 py-1 text-xs gap-1",
+				"leadingIcon": "size-4",
+				"leadingAvatarSize": "3xs",
+				"trailingIcon": "size-4"
+			},
+			"sm": {
+				"base": "px-2.5 py-1.5 text-xs gap-1.5",
+				"leadingIcon": "size-4",
+				"leadingAvatarSize": "3xs",
+				"trailingIcon": "size-4"
+			},
+			"md": {
+				"base": "px-2.5 py-1.5 text-sm gap-1.5",
+				"leadingIcon": "size-5",
+				"leadingAvatarSize": "2xs",
+				"trailingIcon": "size-5"
+			},
+			"lg": {
+				"base": "px-3 py-2 text-sm gap-2",
+				"leadingIcon": "size-5",
+				"leadingAvatarSize": "2xs",
+				"trailingIcon": "size-5"
+			},
+			"xl": {
+				"base": "px-3 py-2 text-base gap-2",
+				"leadingIcon": "size-6",
+				"leadingAvatarSize": "xs",
+				"trailingIcon": "size-6"
+			}
+		},
+		"block": { "true": {
+			"base": "w-full justify-center",
+			"trailingIcon": "ms-auto"
+		} },
+		"square": { "true": "" },
+		"leading": { "true": "" },
+		"trailing": { "true": "" },
+		"loading": { "true": "" },
+		"active": {
+			"true": { "base": "" },
+			"false": { "base": "" }
+		}
+	},
+	"compoundVariants": [
+		{
+			"color": "primary",
+			"variant": "solid",
+			"class": "text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"
+		},
+		{
+			"color": "secondary",
+			"variant": "solid",
+			"class": "text-inverted bg-secondary hover:bg-secondary/75 active:bg-secondary/75 disabled:bg-secondary aria-disabled:bg-secondary outline-secondary/25 focus-visible:outline-3"
+		},
+		{
+			"color": "success",
+			"variant": "solid",
+			"class": "text-inverted bg-success hover:bg-success/75 active:bg-success/75 disabled:bg-success aria-disabled:bg-success outline-success/25 focus-visible:outline-3"
+		},
+		{
+			"color": "info",
+			"variant": "solid",
+			"class": "text-inverted bg-info hover:bg-info/75 active:bg-info/75 disabled:bg-info aria-disabled:bg-info outline-info/25 focus-visible:outline-3"
+		},
+		{
+			"color": "warning",
+			"variant": "solid",
+			"class": "text-inverted bg-warning hover:bg-warning/75 active:bg-warning/75 disabled:bg-warning aria-disabled:bg-warning outline-warning/25 focus-visible:outline-3"
+		},
+		{
+			"color": "error",
+			"variant": "solid",
+			"class": "text-inverted bg-error hover:bg-error/75 active:bg-error/75 disabled:bg-error aria-disabled:bg-error outline-error/25 focus-visible:outline-3"
+		},
+		{
+			"color": "primary",
+			"variant": "outline",
+			"class": "ring ring-inset ring-primary/50 text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary"
+		},
+		{
+			"color": "secondary",
+			"variant": "outline",
+			"class": "ring ring-inset ring-secondary/50 text-secondary hover:bg-secondary/10 active:bg-secondary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-secondary/25 focus-visible:outline-3 focus-visible:ring-secondary"
+		},
+		{
+			"color": "success",
+			"variant": "outline",
+			"class": "ring ring-inset ring-success/50 text-success hover:bg-success/10 active:bg-success/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-success/25 focus-visible:outline-3 focus-visible:ring-success"
+		},
+		{
+			"color": "info",
+			"variant": "outline",
+			"class": "ring ring-inset ring-info/50 text-info hover:bg-info/10 active:bg-info/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-info/25 focus-visible:outline-3 focus-visible:ring-info"
+		},
+		{
+			"color": "warning",
+			"variant": "outline",
+			"class": "ring ring-inset ring-warning/50 text-warning hover:bg-warning/10 active:bg-warning/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-warning/25 focus-visible:outline-3 focus-visible:ring-warning"
+		},
+		{
+			"color": "error",
+			"variant": "outline",
+			"class": "ring ring-inset ring-error/50 text-error hover:bg-error/10 active:bg-error/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-error/25 focus-visible:outline-3 focus-visible:ring-error"
+		},
+		{
+			"color": "primary",
+			"variant": "soft",
+			"class": "text-primary bg-primary/10 hover:bg-primary/15 active:bg-primary/15 outline-primary/25 focus-visible:outline-3 disabled:bg-primary/10 aria-disabled:bg-primary/10"
+		},
+		{
+			"color": "secondary",
+			"variant": "soft",
+			"class": "text-secondary bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 outline-secondary/25 focus-visible:outline-3 disabled:bg-secondary/10 aria-disabled:bg-secondary/10"
+		},
+		{
+			"color": "success",
+			"variant": "soft",
+			"class": "text-success bg-success/10 hover:bg-success/15 active:bg-success/15 outline-success/25 focus-visible:outline-3 disabled:bg-success/10 aria-disabled:bg-success/10"
+		},
+		{
+			"color": "info",
+			"variant": "soft",
+			"class": "text-info bg-info/10 hover:bg-info/15 active:bg-info/15 outline-info/25 focus-visible:outline-3 disabled:bg-info/10 aria-disabled:bg-info/10"
+		},
+		{
+			"color": "warning",
+			"variant": "soft",
+			"class": "text-warning bg-warning/10 hover:bg-warning/15 active:bg-warning/15 outline-warning/25 focus-visible:outline-3 disabled:bg-warning/10 aria-disabled:bg-warning/10"
+		},
+		{
+			"color": "error",
+			"variant": "soft",
+			"class": "text-error bg-error/10 hover:bg-error/15 active:bg-error/15 outline-error/25 focus-visible:outline-3 disabled:bg-error/10 aria-disabled:bg-error/10"
+		},
+		{
+			"color": "primary",
+			"variant": "subtle",
+			"class": "text-primary ring ring-inset ring-primary/25 bg-primary/10 hover:bg-primary/15 active:bg-primary/15 disabled:bg-primary/10 aria-disabled:bg-primary/10 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary"
+		},
+		{
+			"color": "secondary",
+			"variant": "subtle",
+			"class": "text-secondary ring ring-inset ring-secondary/25 bg-secondary/10 hover:bg-secondary/15 active:bg-secondary/15 disabled:bg-secondary/10 aria-disabled:bg-secondary/10 outline-secondary/25 focus-visible:outline-3 focus-visible:ring-secondary"
+		},
+		{
+			"color": "success",
+			"variant": "subtle",
+			"class": "text-success ring ring-inset ring-success/25 bg-success/10 hover:bg-success/15 active:bg-success/15 disabled:bg-success/10 aria-disabled:bg-success/10 outline-success/25 focus-visible:outline-3 focus-visible:ring-success"
+		},
+		{
+			"color": "info",
+			"variant": "subtle",
+			"class": "text-info ring ring-inset ring-info/25 bg-info/10 hover:bg-info/15 active:bg-info/15 disabled:bg-info/10 aria-disabled:bg-info/10 outline-info/25 focus-visible:outline-3 focus-visible:ring-info"
+		},
+		{
+			"color": "warning",
+			"variant": "subtle",
+			"class": "text-warning ring ring-inset ring-warning/25 bg-warning/10 hover:bg-warning/15 active:bg-warning/15 disabled:bg-warning/10 aria-disabled:bg-warning/10 outline-warning/25 focus-visible:outline-3 focus-visible:ring-warning"
+		},
+		{
+			"color": "error",
+			"variant": "subtle",
+			"class": "text-error ring ring-inset ring-error/25 bg-error/10 hover:bg-error/15 active:bg-error/15 disabled:bg-error/10 aria-disabled:bg-error/10 outline-error/25 focus-visible:outline-3 focus-visible:ring-error"
+		},
+		{
+			"color": "primary",
+			"variant": "ghost",
+			"class": "text-primary hover:bg-primary/10 active:bg-primary/10 outline-primary/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+		},
+		{
+			"color": "secondary",
+			"variant": "ghost",
+			"class": "text-secondary hover:bg-secondary/10 active:bg-secondary/10 outline-secondary/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+		},
+		{
+			"color": "success",
+			"variant": "ghost",
+			"class": "text-success hover:bg-success/10 active:bg-success/10 outline-success/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+		},
+		{
+			"color": "info",
+			"variant": "ghost",
+			"class": "text-info hover:bg-info/10 active:bg-info/10 outline-info/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+		},
+		{
+			"color": "warning",
+			"variant": "ghost",
+			"class": "text-warning hover:bg-warning/10 active:bg-warning/10 outline-warning/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+		},
+		{
+			"color": "error",
+			"variant": "ghost",
+			"class": "text-error hover:bg-error/10 active:bg-error/10 outline-error/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent"
+		},
+		{
+			"color": "primary",
+			"variant": "link",
+			"class": "text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3"
+		},
+		{
+			"color": "secondary",
+			"variant": "link",
+			"class": "text-secondary hover:text-secondary/75 active:text-secondary/75 disabled:text-secondary aria-disabled:text-secondary outline-secondary/25 focus-visible:outline-3"
+		},
+		{
+			"color": "success",
+			"variant": "link",
+			"class": "text-success hover:text-success/75 active:text-success/75 disabled:text-success aria-disabled:text-success outline-success/25 focus-visible:outline-3"
+		},
+		{
+			"color": "info",
+			"variant": "link",
+			"class": "text-info hover:text-info/75 active:text-info/75 disabled:text-info aria-disabled:text-info outline-info/25 focus-visible:outline-3"
+		},
+		{
+			"color": "warning",
+			"variant": "link",
+			"class": "text-warning hover:text-warning/75 active:text-warning/75 disabled:text-warning aria-disabled:text-warning outline-warning/25 focus-visible:outline-3"
+		},
+		{
+			"color": "error",
+			"variant": "link",
+			"class": "text-error hover:text-error/75 active:text-error/75 disabled:text-error aria-disabled:text-error outline-error/25 focus-visible:outline-3"
+		},
+		{
+			"color": "neutral",
+			"variant": "solid",
+			"class": "text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3"
+		},
+		{
+			"color": "neutral",
+			"variant": "outline",
+			"class": "ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted"
+		},
+		{
+			"color": "neutral",
+			"variant": "soft",
+			"class": "text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 outline-inverted/25 focus-visible:outline-3 disabled:bg-elevated aria-disabled:bg-elevated"
+		},
+		{
+			"color": "neutral",
+			"variant": "subtle",
+			"class": "ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted"
+		},
+		{
+			"color": "neutral",
+			"variant": "ghost",
+			"class": "text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent"
+		},
+		{
+			"color": "neutral",
+			"variant": "link",
+			"class": "text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3"
+		},
+		{
+			"size": "xs",
+			"square": true,
+			"class": "p-1"
+		},
+		{
+			"size": "sm",
+			"square": true,
+			"class": "p-1.5"
+		},
+		{
+			"size": "md",
+			"square": true,
+			"class": "p-1.5"
+		},
+		{
+			"size": "lg",
+			"square": true,
+			"class": "p-2"
+		},
+		{
+			"size": "xl",
+			"square": true,
+			"class": "p-2"
+		},
+		{
+			"loading": true,
+			"leading": true,
+			"class": { "leadingIcon": "animate-spin" }
+		},
+		{
+			"loading": true,
+			"leading": false,
+			"trailing": true,
+			"class": { "trailingIcon": "animate-spin" }
+		}
+	],
+	"defaultVariants": {
+		"color": "primary",
+		"variant": "solid",
+		"size": "md"
+	}
+};
+// node_modules/@nuxt/ui/dist/runtime/components/Button.vue
+var _sfc_main = {
+	__name: "UButton",
+	__ssrInlineRender: true,
+	props: {
+		label: {
+			type: String,
+			required: false
+		},
+		color: {
+			type: null,
+			required: false
+		},
+		activeColor: {
+			type: null,
+			required: false
+		},
+		variant: {
+			type: null,
+			required: false
+		},
+		activeVariant: {
+			type: null,
+			required: false
+		},
+		size: {
+			type: null,
+			required: false
+		},
+		square: {
+			type: Boolean,
+			required: false
+		},
+		block: {
+			type: Boolean,
+			required: false
+		},
+		loadingAuto: {
+			type: Boolean,
+			required: false
+		},
+		onClick: {
+			type: [Function, Array],
+			required: false
+		},
+		class: {
+			type: null,
+			required: false
+		},
+		ui: {
+			type: Object,
+			required: false
+		},
+		icon: {
+			type: null,
+			required: false
+		},
+		avatar: {
+			type: Object,
+			required: false
+		},
+		leading: {
+			type: Boolean,
+			required: false
+		},
+		leadingIcon: {
+			type: null,
+			required: false
+		},
+		trailing: {
+			type: Boolean,
+			required: false
+		},
+		trailingIcon: {
+			type: null,
+			required: false
+		},
+		loading: {
+			type: Boolean,
+			required: false
+		},
+		loadingIcon: {
+			type: null,
+			required: false
+		},
+		as: {
+			type: null,
+			required: false
+		},
+		type: {
+			type: null,
+			required: false
+		},
+		disabled: {
+			type: Boolean,
+			required: false
+		},
+		active: {
+			type: Boolean,
+			required: false
+		},
+		exact: {
+			type: Boolean,
+			required: false
+		},
+		exactQuery: {
+			type: [Boolean, String],
+			required: false
+		},
+		exactHash: {
+			type: Boolean,
+			required: false
+		},
+		inactiveClass: {
+			type: String,
+			required: false
+		},
+		locale: {
+			type: [Boolean, String],
+			required: false
+		},
+		to: {
+			type: null,
+			required: false
+		},
+		href: {
+			type: null,
+			required: false
+		},
+		external: {
+			type: Boolean,
+			required: false
+		},
+		target: {
+			type: [
+				String,
+				Object,
+				null
+			],
+			required: false
+		},
+		rel: {
+			type: [
+				String,
+				Object,
+				null
+			],
+			required: false
+		},
+		noRel: {
+			type: Boolean,
+			required: false
+		},
+		prefetchedClass: {
+			type: String,
+			required: false
+		},
+		prefetch: {
+			type: Boolean,
+			required: false
+		},
+		prefetchOn: {
+			type: [String, Object],
+			required: false
+		},
+		noPrefetch: {
+			type: Boolean,
+			required: false
+		},
+		trailingSlash: {
+			type: String,
+			required: false
+		},
+		activeClass: {
+			type: String,
+			required: false
+		},
+		exactActiveClass: {
+			type: String,
+			required: false
+		},
+		ariaCurrentValue: {
+			type: String,
+			required: false
+		},
+		viewTransition: {
+			type: Boolean,
+			required: false
+		},
+		replace: {
+			type: Boolean,
+			required: false
+		}
+	},
+	setup(__props) {
+		const _props = __props;
+		const slots = useSlots();
+		const props = useComponentProps("button", _props);
+		const appConfig = useAppConfig();
+		const { orientation, size: buttonSize } = useFieldGroup(_props);
+		const linkProps = useForwardProps$1(computed(() => pickLinkProps(props)));
+		const forwardedLinkProps = computed(() => omit(linkProps.value, [
+			"type",
+			"disabled",
+			"onClick"
+		]));
+		const loadingAutoState = ref(false);
+		const formLoading = inject(formLoadingInjectionKey, void 0);
+		async function onClickWrapper(event) {
+			loadingAutoState.value = true;
+			const callbacks = Array.isArray(props.onClick) ? props.onClick : [props.onClick];
+			try {
+				await Promise.all(callbacks.map((fn) => fn?.(event)));
+			} finally {
+				loadingAutoState.value = false;
+			}
+		}
+		const isLoading = computed(() => {
+			return props.loading || props.loadingAuto && (loadingAutoState.value || formLoading?.value && props.type === "submit");
+		});
+		const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(computed(() => ({
+			icon: props.icon,
+			leading: props.leading,
+			leadingIcon: props.leadingIcon,
+			trailing: props.trailing,
+			trailingIcon: props.trailingIcon,
+			loading: isLoading.value,
+			loadingIcon: props.loadingIcon
+		})));
+		const ui = computed(() => tv({
+			extend: virtual_nuxt__nuxt_2Fui_2Fbutton_default,
+			...defu$1({ variants: { active: {
+				true: { base: mergeClasses(appConfig.ui?.button?.variants?.active?.true?.base, props.activeClass) },
+				false: { base: mergeClasses(appConfig.ui?.button?.variants?.active?.false?.base, props.inactiveClass) }
+			} } }, appConfig.ui?.button || {})
+		})({
+			color: props.color,
+			variant: props.variant,
+			size: buttonSize.value ?? props.size,
+			loading: isLoading.value,
+			block: props.block,
+			square: props.square || !slots.default && !props.label,
+			leading: isLeading.value,
+			trailing: isTrailing.value,
+			fieldGroup: orientation.value
+		}));
+		return (_ctx, _push, _parent, _attrs) => {
+			_push(ssrRenderComponent(_sfc_main$1, mergeProps({
+				type: unref(props).type,
+				disabled: unref(props).disabled || isLoading.value
+			}, forwardedLinkProps.value, { custom: "" }, _attrs), {
+				default: withCtx(({ active, ...slotProps }, _push, _parent, _scopeId) => {
+					if (_push) _push(ssrRenderComponent(_sfc_main$2, mergeProps({ "data-slot": "base" }, slotProps, {
+						class: ui.value.base({
+							class: [unref(props).ui?.base, unref(props).class],
+							active,
+							...active && unref(props).activeVariant ? { variant: unref(props).activeVariant } : {},
+							...active && unref(props).activeColor ? { color: unref(props).activeColor } : {}
+						}),
+						onClick: onClickWrapper
+					}), {
+						default: withCtx((_, _push, _parent, _scopeId) => {
+							if (_push) {
+								ssrRenderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => {
+									if (unref(isLeading) && unref(leadingIconName)) _push(ssrRenderComponent(_sfc_main$5, {
+										name: unref(leadingIconName),
+										"data-slot": "leadingIcon",
+										class: ui.value.leadingIcon({
+											class: unref(props).ui?.leadingIcon,
+											active
+										})
+									}, null, _parent, _scopeId));
+									else if (!!unref(props).avatar) _push(ssrRenderComponent(_sfc_main$3, mergeProps({ size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize() }, unref(props).avatar, {
+										"data-slot": "leadingAvatar",
+										class: ui.value.leadingAvatar({
+											class: unref(props).ui?.leadingAvatar,
+											active
+										})
+									}), null, _parent, _scopeId));
+									else _push(`<!---->`);
+								}, _push, _parent, _scopeId);
+								ssrRenderSlot(_ctx.$slots, "default", { ui: ui.value }, () => {
+									if (unref(props).label !== void 0 && unref(props).label !== null) _push(`<span data-slot="label" class="${ssrRenderClass(ui.value.label({
+										class: unref(props).ui?.label,
+										active
+									}))}"${_scopeId}>${ssrInterpolate(unref(props).label)}</span>`);
+									else _push(`<!---->`);
+								}, _push, _parent, _scopeId);
+								ssrRenderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => {
+									if (unref(isTrailing) && unref(trailingIconName)) _push(ssrRenderComponent(_sfc_main$5, {
+										name: unref(trailingIconName),
+										"data-slot": "trailingIcon",
+										class: ui.value.trailingIcon({
+											class: unref(props).ui?.trailingIcon,
+											active
+										})
+									}, null, _parent, _scopeId));
+									else _push(`<!---->`);
+								}, _push, _parent, _scopeId);
+							} else return [
+								renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
+									key: 0,
+									name: unref(leadingIconName),
+									"data-slot": "leadingIcon",
+									class: ui.value.leadingIcon({
+										class: unref(props).ui?.leadingIcon,
+										active
+									})
+								}, null, 8, ["name", "class"])) : !!unref(props).avatar ? (openBlock(), createBlock(_sfc_main$3, mergeProps({
+									key: 1,
+									size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+								}, unref(props).avatar, {
+									"data-slot": "leadingAvatar",
+									class: ui.value.leadingAvatar({
+										class: unref(props).ui?.leadingAvatar,
+										active
+									})
+								}), null, 16, ["size", "class"])) : createCommentVNode("", true)]),
+								renderSlot(_ctx.$slots, "default", { ui: ui.value }, () => [unref(props).label !== void 0 && unref(props).label !== null ? (openBlock(), createBlock("span", {
+									key: 0,
+									"data-slot": "label",
+									class: ui.value.label({
+										class: unref(props).ui?.label,
+										active
+									})
+								}, toDisplayString(unref(props).label), 3)) : createCommentVNode("", true)]),
+								renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
+									key: 0,
+									name: unref(trailingIconName),
+									"data-slot": "trailingIcon",
+									class: ui.value.trailingIcon({
+										class: unref(props).ui?.trailingIcon,
+										active
+									})
+								}, null, 8, ["name", "class"])) : createCommentVNode("", true)])
+							];
+						}),
+						_: 2
+					}, _parent, _scopeId));
+					else return [createVNode(_sfc_main$2, mergeProps({ "data-slot": "base" }, slotProps, {
+						class: ui.value.base({
+							class: [unref(props).ui?.base, unref(props).class],
+							active,
+							...active && unref(props).activeVariant ? { variant: unref(props).activeVariant } : {},
+							...active && unref(props).activeColor ? { color: unref(props).activeColor } : {}
+						}),
+						onClick: onClickWrapper
+					}), {
+						default: withCtx(() => [
+							renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => [unref(isLeading) && unref(leadingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
+								key: 0,
+								name: unref(leadingIconName),
+								"data-slot": "leadingIcon",
+								class: ui.value.leadingIcon({
+									class: unref(props).ui?.leadingIcon,
+									active
+								})
+							}, null, 8, ["name", "class"])) : !!unref(props).avatar ? (openBlock(), createBlock(_sfc_main$3, mergeProps({
+								key: 1,
+								size: unref(props).ui?.leadingAvatarSize || ui.value.leadingAvatarSize()
+							}, unref(props).avatar, {
+								"data-slot": "leadingAvatar",
+								class: ui.value.leadingAvatar({
+									class: unref(props).ui?.leadingAvatar,
+									active
+								})
+							}), null, 16, ["size", "class"])) : createCommentVNode("", true)]),
+							renderSlot(_ctx.$slots, "default", { ui: ui.value }, () => [unref(props).label !== void 0 && unref(props).label !== null ? (openBlock(), createBlock("span", {
+								key: 0,
+								"data-slot": "label",
+								class: ui.value.label({
+									class: unref(props).ui?.label,
+									active
+								})
+							}, toDisplayString(unref(props).label), 3)) : createCommentVNode("", true)]),
+							renderSlot(_ctx.$slots, "trailing", { ui: ui.value }, () => [unref(isTrailing) && unref(trailingIconName) ? (openBlock(), createBlock(_sfc_main$5, {
+								key: 0,
+								name: unref(trailingIconName),
+								"data-slot": "trailingIcon",
+								class: ui.value.trailingIcon({
+									class: unref(props).ui?.trailingIcon,
+									active
+								})
+							}, null, 8, ["name", "class"])) : createCommentVNode("", true)])
+						]),
+						_: 2
+					}, 1040, ["class"])];
+				}),
+				_: 3
+			}, _parent));
+		};
+	}
+};
+var _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/Button.vue");
+	return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+export { _sfc_main$4 as a, FieldGroupReset as c, _sfc_main$3 as i, useFieldGroup as l, _sfc_main$1 as n, _sfc_main$5 as o, _sfc_main$2 as r, pickLinkProps as s, _sfc_main as t, useComponentIcons as u };
+
+//# sourceMappingURL=Button-Cwxo7d33.js.map

@@ -1,0 +1,56 @@
+import { n as useSeoMeta } from "./head-rFsGK3Ox.js";
+import { t as _sfc_main } from "./Accordion-44u7Jnkk.js";
+import { r as _sfc_main$1, t as site } from "./site-BjEVYaKT.js";
+import { t as _sfc_main$2 } from "./PageHero-Dbu4Xw3Y.js";
+import { createVNode, defineComponent, mergeProps, unref, useSSRContext, withCtx } from "vue";
+import { ssrRenderAttrs, ssrRenderComponent } from "vue/server-renderer";
+// app/pages/beliefs.vue?vue&type=script&setup=true&lang.ts
+var beliefs_vue_vue_type_script_setup_true_lang_default = /*@__PURE__*/ defineComponent({
+	__name: "beliefs",
+	__ssrInlineRender: true,
+	setup(__props) {
+		useSeoMeta({
+			title: `Beliefs | ${site.name}`,
+			description: site.home.beliefsDescription,
+			ogTitle: `Beliefs | ${site.name}`,
+			ogDescription: site.home.beliefsDescription,
+			ogImage: site.hero.image,
+			twitterCard: "summary_large_image"
+		});
+		return (_ctx, _push, _parent, _attrs) => {
+			const _component_UPageHero = _sfc_main$2;
+			const _component_UContainer = _sfc_main$1;
+			const _component_UAccordion = _sfc_main;
+			_push(`<div${ssrRenderAttrs(mergeProps({ class: "pt-24" }, _attrs))}>`);
+			_push(ssrRenderComponent(_component_UPageHero, {
+				title: unref(site).home.beliefsTitle,
+				description: unref(site).home.beliefsDescription
+			}, null, _parent));
+			_push(ssrRenderComponent(_component_UContainer, { class: "max-w-4xl pb-24" }, {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) _push(ssrRenderComponent(_component_UAccordion, {
+						items: [...unref(site).beliefs],
+						ui: { item: "border-b border-slate-200" }
+					}, null, _parent, _scopeId));
+					else return [createVNode(_component_UAccordion, {
+						items: [...unref(site).beliefs],
+						ui: { item: "border-b border-slate-200" }
+					}, null, 8, ["items"])];
+				}),
+				_: 1
+			}, _parent));
+			_push(`</div>`);
+		};
+	}
+});
+// app/pages/beliefs.vue
+var _sfc_setup = beliefs_vue_vue_type_script_setup_true_lang_default.setup;
+beliefs_vue_vue_type_script_setup_true_lang_default.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/beliefs.vue");
+	return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+var beliefs_default = beliefs_vue_vue_type_script_setup_true_lang_default;
+export { beliefs_default as default };
+
+//# sourceMappingURL=beliefs-CCAXOmAO.js.map

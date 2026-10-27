@@ -1,0 +1,1 @@
+<template><a href="#main-content" class="sr-only z-[100] focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-slate-900">Skip to content</a><AppHeader /><main id="main-content"><slot /></main><SiteFooter /><ScrollTop /><VisitPopup /></template>

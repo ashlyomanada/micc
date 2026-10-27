@@ -1,0 +1,271 @@
+import { t as useAppConfig } from "./config-CAn_Nf-x.js";
+import { r as useComponentProps, t as tv, u as Primitive } from "./tv-CMuosA3a.js";
+import { computed, mergeProps, renderSlot, unref, useSSRContext, withCtx } from "vue";
+import { ssrRenderComponent, ssrRenderSlot } from "vue/server-renderer";
+// virtual:nuxt:.nuxt%2Fui%2Fcontainer.ts
+var virtual_nuxt__nuxt_2Fui_2Fcontainer_default = { "base": "w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8" };
+// node_modules/@nuxt/ui/dist/runtime/components/Container.vue
+var _sfc_main = {
+	__name: "UContainer",
+	__ssrInlineRender: true,
+	props: {
+		as: {
+			type: null,
+			required: false
+		},
+		class: {
+			type: null,
+			required: false
+		},
+		ui: {
+			type: Object,
+			required: false
+		}
+	},
+	setup(__props) {
+		const props = useComponentProps("container", __props);
+		const appConfig = useAppConfig();
+		const ui = computed(() => tv({
+			extend: virtual_nuxt__nuxt_2Fui_2Fcontainer_default,
+			...appConfig.ui?.container || {}
+		}));
+		return (_ctx, _push, _parent, _attrs) => {
+			_push(ssrRenderComponent(unref(Primitive), mergeProps({
+				as: unref(props).as,
+				class: ui.value({ class: [unref(props).ui?.base, unref(props).class] })
+			}, _attrs), {
+				default: withCtx((_, _push, _parent, _scopeId) => {
+					if (_push) ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent, _scopeId);
+					else return [renderSlot(_ctx.$slots, "default")];
+				}),
+				_: 3
+			}, _parent));
+		};
+	}
+};
+var _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/Container.vue");
+	return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+// node_modules/@nuxt/ui/dist/runtime/composables/usePrefix.js
+function usePrefix() {
+	const prefix = useAppConfig().ui?.prefix;
+	return (classString) => {
+		if (!prefix || !classString) return classString;
+		return classString.split(/\s+/).filter(Boolean).map((cls) => `${prefix}:${cls}`).join(" ");
+	};
+}
+// app/data/site.ts
+var placeholder = (name) => `/images/${name}.svg`;
+var site = {
+	name: "[Church Name]",
+	tagline: "A community learning to follow Jesus together.",
+	hero: {
+		image: placeholder("hero"),
+		subtitle: "Come Worship God With Us",
+		cta: "Contact Us"
+	},
+	contact: {
+		venue: "[Church Venue]",
+		address: "[Street Address, City, State]",
+		serviceTime: "Every Sunday – 10:00am",
+		phone: "[Church Phone Number]",
+		email: "[Church Email Address]",
+		mapUrl: "https://maps.google.com/?q=Church",
+		mission: "We want to help people follow Jesus and bring hope to our community through the Bible.",
+		affiliation: "[Church affiliation or network]"
+	},
+	home: {
+		bible: {
+			eyebrow: "A faith that shapes everyday life",
+			title: "Use the Bible to Change Your Life",
+			description: "[A brief invitation to explore the Bible and discover how its wisdom speaks to daily life.]",
+			cta: "Reach out to us"
+		},
+		seriesEyebrow: "Sermon series",
+		seriesCta: "YouTube Sermons",
+		featuresEyebrow: "Take a next step",
+		featuresTitle: "A place to belong and grow",
+		featuresDescription: "[Whether exploring faith or looking for a church family, there is a next step for you.]",
+		features: [
+			{
+				title: "Church Gatherings",
+				text: "[Find a welcoming community near you.]",
+				image: placeholder("baptism-1"),
+				to: "/locations"
+			},
+			{
+				title: "Online Sermons",
+				text: "[Explore messages grounded in the Bible.]",
+				image: placeholder("series"),
+				to: "https://youtube.com/"
+			},
+			{
+				title: "Bible Studies",
+				text: "[Ask questions and discover the story of Scripture.]",
+				image: placeholder("book"),
+				to: "/beliefs"
+			},
+			{
+				title: "Contact Us",
+				text: "[We would love to hear from you.]",
+				image: placeholder("leader-one"),
+				to: "/leadership"
+			}
+		],
+		locationsTitle: "Find your community",
+		locationsDescription: "[Discover a local gathering and connect with people in your area.]",
+		gatheringsTitle: "Gatherings",
+		directionsLabel: "Google Maps →",
+		beliefsTitle: "What we believe",
+		beliefsDescription: "[A few convictions that shape how we follow Jesus together.]",
+		leadershipTitle: "Meet our leadership",
+		leadershipDescription: "[Get to know the people who help guide and serve our church community.]",
+		visitTitle: "Plan your visit",
+		visitDescription: "[We look forward to welcoming you. Find service details and what to expect below.]",
+		expectTitle: "What to expect",
+		faqEyebrow: "Questions?",
+		faqTitle: "A little more about your visit",
+		faqDescription: "[Here are a few details to help you feel at home when you arrive.]"
+	},
+	socials: [
+		{
+			label: "Facebook",
+			icon: "i-simple-icons-facebook",
+			url: "https://facebook.com/"
+		},
+		{
+			label: "Instagram",
+			icon: "i-simple-icons-instagram",
+			url: "https://instagram.com/"
+		},
+		{
+			label: "YouTube",
+			icon: "i-simple-icons-youtube",
+			url: "https://youtube.com/"
+		}
+	],
+	regions: [
+		{
+			id: "central",
+			name: "Central",
+			groups: [
+				"[Central Campus]",
+				"[Central Professionals]",
+				"[Central Marrieds]"
+			],
+			address: "[Central meeting address]",
+			time: "[Weekly meeting time]"
+		},
+		{
+			id: "north",
+			name: "North",
+			groups: [
+				"[North Campus]",
+				"[North Professionals]",
+				"[North Marrieds]"
+			],
+			address: "[North meeting address]",
+			time: "[Weekly meeting time]"
+		},
+		{
+			id: "west",
+			name: "West",
+			groups: [
+				"[West Campus]",
+				"[West Professionals]",
+				"[West Marrieds]"
+			],
+			address: "[West meeting address]",
+			time: "[Weekly meeting time]"
+		},
+		{
+			id: "east",
+			name: "East",
+			groups: [
+				"[East Campus]",
+				"[East Professionals]",
+				"[East Marrieds]"
+			],
+			address: "[East meeting address]",
+			time: "[Weekly meeting time]"
+		}
+	],
+	leaders: [{
+		name: "[Pastor Name]",
+		role: "Lead Pastor",
+		bio: "[A short introduction to the pastor and their heart for the church.]",
+		image: placeholder("leader-one"),
+		email: "mailto:[pastor-email]"
+	}, {
+		name: "[Ministry Leader Name]",
+		role: "Ministry Leader",
+		bio: "[A short introduction to this leader and the ministry they serve.]",
+		image: placeholder("leader-two"),
+		email: "mailto:[leader-email]"
+	}],
+	sermons: {
+		title: "Latest Sermons",
+		videoId: "dQw4w9WgXcQ",
+		url: "https://www.youtube.com/@",
+		description: "Watch a recent message and explore practical teaching from the Bible."
+	},
+	series: {
+		title: "[Sermon Series Title]",
+		description: "[A short introduction to this teaching series and the questions it explores.]",
+		image: placeholder("series")
+	},
+	baptismPhotos: Array.from({ length: 8 }, (_, i) => ({
+		image: placeholder(`baptism-${i + 1}`),
+		alt: `Placeholder baptism photo ${i + 1}`
+	})),
+	book: {
+		title: "[Book Title]",
+		description: "[An accessible introduction to the Bible and a life of faith.]",
+		image: placeholder("book"),
+		quote: "“[A brief placeholder testimonial about this reading material.]”",
+		attribution: "[Reader Name]",
+		url: "https://example.com/purchase"
+	},
+	beliefs: [
+		{
+			label: "The Bible",
+			content: "[Placeholder conviction about the Bible as a guide for faith and life.] (2 Timothy 3:16–17)"
+		},
+		{
+			label: "God and Jesus",
+			content: "[Placeholder conviction about God, Jesus Christ, and the good news.] (John 3:16)"
+		},
+		{
+			label: "Discipleship",
+			content: "[Placeholder conviction about following Jesus in community.] (Matthew 28:19–20)"
+		},
+		{
+			label: "The Church",
+			content: "[Placeholder conviction about a welcoming community of faith.] (Ephesians 2:19–22)"
+		}
+	],
+	expectations: [
+		{
+			label: "What should I wear?",
+			content: "Come as you are. [Add a note about the usual dress at your gathering.]"
+		},
+		{
+			label: "Where can I park?",
+			content: "[Add nearby parking information.]"
+		},
+		{
+			label: "Can I bring my children?",
+			content: "[Add details about children and family welcome.]"
+		},
+		{
+			label: "How long is the service?",
+			content: "[Add the typical service length and what to expect.]"
+		}
+	]
+};
+export { usePrefix as n, _sfc_main as r, site as t };
+
+//# sourceMappingURL=site-BjEVYaKT.js.map

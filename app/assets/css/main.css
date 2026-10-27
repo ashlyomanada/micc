@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+@theme {
+  --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #effaf8;
+  --color-brand-100: #d5f3ed;
+  --color-brand-200: #abe7dc;
+  --color-brand-300: #72d3c4;
+  --color-brand-400: #3cb9aa;
+  --color-brand-500: #209c90;
+  --color-brand-600: #177d75;
+  --color-brand-700: #17645f;
+  --color-brand-800: #18504e;
+  --color-brand-900: #174342;
+  --color-brand-950: #092726;
+}
+:root { font-family: var(--font-sans); scroll-behavior: smooth; }
+html { scroll-padding-top: 6rem; }
+body { margin: 0; }
+.font-display { font-family: var(--font-display); }
+.scroll-reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }

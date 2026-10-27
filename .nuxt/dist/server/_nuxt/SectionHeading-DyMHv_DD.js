@@ -1,0 +1,38 @@
+import { defineComponent, mergeProps, useSSRContext } from "vue";
+import { ssrInterpolate, ssrRenderAttrs } from "vue/server-renderer";
+// app/components/SectionHeading.vue?vue&type=script&setup=true&lang.ts
+var SectionHeading_vue_vue_type_script_setup_true_lang_default = /*@__PURE__*/ defineComponent({
+	__name: "SectionHeading",
+	__ssrInlineRender: true,
+	props: {
+		eyebrow: {},
+		title: {},
+		description: {},
+		centered: {
+			type: Boolean,
+			default: false
+		}
+	},
+	setup(__props) {
+		return (_ctx, _push, _parent, _attrs) => {
+			_push(`<div${ssrRenderAttrs(mergeProps({ class: ["mb-10 max-w-3xl", __props.centered && "mx-auto text-center"] }, _attrs))}>`);
+			if (__props.eyebrow) _push(`<p class="mb-3 text-xs font-bold uppercase tracking-[.22em] text-primary">${ssrInterpolate(__props.eyebrow)}</p>`);
+			else _push(`<!---->`);
+			_push(`<h2 class="font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">${ssrInterpolate(__props.title)}</h2>`);
+			if (__props.description) _push(`<p class="mt-4 text-base leading-7 text-slate-600 sm:text-lg">${ssrInterpolate(__props.description)}</p>`);
+			else _push(`<!---->`);
+			_push(`</div>`);
+		};
+	}
+});
+// app/components/SectionHeading.vue
+var _sfc_setup = SectionHeading_vue_vue_type_script_setup_true_lang_default.setup;
+SectionHeading_vue_vue_type_script_setup_true_lang_default.setup = (props, ctx) => {
+	const ssrContext = useSSRContext();
+	(ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/SectionHeading.vue");
+	return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+var SectionHeading_default = Object.assign(SectionHeading_vue_vue_type_script_setup_true_lang_default, { __name: "SectionHeading" });
+export { SectionHeading_default as t };
+
+//# sourceMappingURL=SectionHeading-DyMHv_DD.js.map

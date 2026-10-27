@@ -1,0 +1,642 @@
+import { h as createContext, u as Primitive } from "./tv-CMuosA3a.js";
+import { t as isNullish } from "./nullish-Dvpx-avd.js";
+import { n as injectConfigProviderContext } from "./ConfigProvider-CpCHo4QI.js";
+import { t as useForwardExpose } from "./useForwardExpose-CrVBNDxY.js";
+import { t as useId$1 } from "./useId-BZnJFoR8.js";
+import { t as Presence_default } from "./Presence-wbRA2BG8.js";
+import { computed, createBlock, createCommentVNode, createVNode, defineComponent, mergeProps, nextTick, openBlock, ref, renderSlot, toRefs, unref, watch, withCtx, withKeys } from "vue";
+import { isEqual } from "/Users/ccci/Project/node_modules/ohash/dist/index.mjs";
+import { useEventListener, useVModel } from "/Users/ccci/Project/node_modules/@vueuse/core/dist/index.js";
+// node_modules/reka-ui/dist/shared/isValueEqualOrExist.js
+/**
+* The function `isValueEqualOrExist` checks if a value is equal to or exists in another value or
+* array.
+* @param {T | T[] | undefined} base - It represents the base value that you want to compare with the `current` value.
+* @param {T | T[] | undefined} current - The `current` parameter represents the current value that you want to compare with the `base` value or values.
+* @returns The `isValueEqualOrExist` function returns a boolean value. It checks if the `base` value
+* is equal to the `current` value or if the `current` value exists within the `base` value. The
+* function handles cases where `base` can be a single value, an array of values, or undefined.
+*/
+function isValueEqualOrExist(base, current) {
+	if (isNullish(base)) return false;
+	if (Array.isArray(base)) return base.some((val) => isEqual(val, current));
+	else return isEqual(base, current);
+}
+// node_modules/reka-ui/dist/shared/useArrowNavigation.js
+var ignoredElement = ["INPUT", "TEXTAREA"];
+/**
+* Allow arrow navigation for every html element with data-reka-collection-item tag
+*
+* @param e               Keyboard event
+* @param currentElement  Event initiator element or any element that wants to handle the navigation
+* @param parentElement   Parent element where contains all the collection items, this will collect every item to be used when nav
+* @param options         further options
+* @returns               the navigated html element or null if none
+*/
+function useArrowNavigation(e, currentElement, parentElement, options = {}) {
+	if (!currentElement || options.enableIgnoredElement && ignoredElement.includes(currentElement.nodeName)) return null;
+	const { arrowKeyOptions = "both", attributeName = "[data-reka-collection-item]", itemsArray = [], loop = true, dir = "ltr", preventScroll = true, focus = false } = options;
+	const [right, left, up, down, home, end] = [
+		e.key === "ArrowRight",
+		e.key === "ArrowLeft",
+		e.key === "ArrowUp",
+		e.key === "ArrowDown",
+		e.key === "Home",
+		e.key === "End"
+	];
+	const goingVertical = up || down;
+	const goingHorizontal = right || left;
+	if (!home && !end && (!goingVertical && !goingHorizontal || arrowKeyOptions === "vertical" && goingHorizontal || arrowKeyOptions === "horizontal" && goingVertical)) return null;
+	const allCollectionItems = parentElement ? Array.from(parentElement.querySelectorAll(attributeName)) : itemsArray;
+	if (!allCollectionItems.length) return null;
+	if (preventScroll) e.preventDefault();
+	let item = null;
+	if (goingHorizontal || goingVertical) item = findNextFocusableElement(allCollectionItems, currentElement, {
+		goForward: goingVertical ? down : dir === "ltr" ? right : left,
+		loop
+	});
+	else if (home) item = allCollectionItems.at(0) || null;
+	else if (end) item = allCollectionItems.at(-1) || null;
+	if (focus) item?.focus();
+	return item;
+}
+/**
+* Recursive function to find the next focusable element to avoid disabled elements
+*
+* @param elements Elements to navigate
+* @param currentElement Current active element
+* @param options
+* @returns next focusable element
+*/
+function findNextFocusableElement(elements, currentElement, options, iterations = !elements.includes(currentElement) ? elements.length + 1 : elements.length) {
+	if (--iterations === 0) return null;
+	const index = elements.indexOf(currentElement);
+	let newIndex;
+	if (index === -1) newIndex = options.goForward ? 0 : elements.length - 1;
+	else newIndex = options.goForward ? index + 1 : index - 1;
+	if (!options.loop && (newIndex < 0 || newIndex >= elements.length)) return null;
+	const candidate = elements[(newIndex + elements.length) % elements.length];
+	if (!candidate) return null;
+	if (candidate.hasAttribute("disabled") && candidate.getAttribute("disabled") !== "false") return findNextFocusableElement(elements, candidate, options, iterations);
+	return candidate;
+}
+// node_modules/reka-ui/dist/shared/useDirection.js
+/**
+* The `useDirection` function provides a way to access the current direction in your application.
+* @param {Ref<Direction | undefined>} [dir] - An optional ref containing the direction (ltr or rtl).
+* @returns  computed value that combines with the resolved direction.
+*/
+function useDirection(dir) {
+	const context = injectConfigProviderContext({ dir: ref("ltr") });
+	return computed(() => dir?.value || context.dir?.value || "ltr");
+}
+// node_modules/reka-ui/dist/Collapsible/CollapsibleRoot.js
+var [injectCollapsibleRootContext, provideCollapsibleRootContext] = /*#__PURE__*/ createContext("CollapsibleRoot");
+var CollapsibleRoot_default = /* @__PURE__ */ defineComponent({
+	__name: "CollapsibleRoot",
+	props: {
+		defaultOpen: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		open: {
+			type: Boolean,
+			required: false,
+			default: void 0
+		},
+		disabled: {
+			type: Boolean,
+			required: false
+		},
+		unmountOnHide: {
+			type: Boolean,
+			required: false,
+			default: true
+		},
+		asChild: {
+			type: Boolean,
+			required: false
+		},
+		as: {
+			type: null,
+			required: false
+		}
+	},
+	emits: ["update:open"],
+	setup(__props, { expose: __expose, emit: __emit }) {
+		const props = __props;
+		const open = useVModel(props, "open", __emit, {
+			defaultValue: props.defaultOpen,
+			passive: props.open === void 0
+		});
+		const { disabled, unmountOnHide } = toRefs(props);
+		provideCollapsibleRootContext({
+			contentId: "",
+			disabled,
+			open,
+			unmountOnHide,
+			onOpenToggle: () => {
+				if (disabled.value) return;
+				open.value = !open.value;
+			}
+		});
+		__expose({ open });
+		useForwardExpose();
+		return (_ctx, _cache) => {
+			return openBlock(), createBlock(unref(Primitive), {
+				as: __props.as,
+				"as-child": props.asChild,
+				"data-state": unref(open) ? "open" : "closed",
+				"data-disabled": unref(disabled) ? "" : void 0
+			}, {
+				default: withCtx(() => [renderSlot(_ctx.$slots, "default", { open: unref(open) })]),
+				_: 3
+			}, 8, [
+				"as",
+				"as-child",
+				"data-state",
+				"data-disabled"
+			]);
+		};
+	}
+});
+// node_modules/reka-ui/dist/Collapsible/CollapsibleContent.js
+var CollapsibleContent_default = /* @__PURE__ */ defineComponent({
+	inheritAttrs: false,
+	__name: "CollapsibleContent",
+	props: {
+		forceMount: {
+			type: Boolean,
+			required: false
+		},
+		asChild: {
+			type: Boolean,
+			required: false
+		},
+		as: {
+			type: null,
+			required: false
+		}
+	},
+	emits: ["contentFound"],
+	setup(__props, { emit: __emit }) {
+		const props = __props;
+		const emits = __emit;
+		const rootContext = injectCollapsibleRootContext();
+		rootContext.contentId ||= useId$1(void 0, "reka-collapsible-content");
+		const presentRef = ref();
+		const { forwardRef, currentElement } = useForwardExpose();
+		const width = ref(0);
+		const height = ref(0);
+		const isOpen = computed(() => rootContext.open.value);
+		const isMountAnimationPrevented = ref(isOpen.value);
+		const currentStyle = ref();
+		watch(() => [isOpen.value, presentRef.value?.present], async () => {
+			await nextTick();
+			const node = currentElement.value;
+			if (!node) return;
+			currentStyle.value = currentStyle.value || {
+				transitionDuration: node.style.transitionDuration,
+				animationName: node.style.animationName
+			};
+			node.style.transitionDuration = "0s";
+			node.style.animationName = "none";
+			const rect = node.getBoundingClientRect();
+			height.value = rect.height;
+			width.value = rect.width;
+			if (!isMountAnimationPrevented.value) {
+				node.style.transitionDuration = currentStyle.value.transitionDuration;
+				node.style.animationName = currentStyle.value.animationName;
+			}
+		}, { immediate: true });
+		const skipAnimation = computed(() => isMountAnimationPrevented.value && rootContext.open.value);
+		useEventListener(currentElement, "beforematch", (ev) => {
+			requestAnimationFrame(() => {
+				rootContext.onOpenToggle();
+				emits("contentFound");
+			});
+		});
+		return (_ctx, _cache) => {
+			return openBlock(), createBlock(unref(Presence_default), {
+				ref_key: "presentRef",
+				ref: presentRef,
+				present: __props.forceMount || unref(rootContext).open.value,
+				"force-mount": true
+			}, {
+				default: withCtx(({ present }) => [createVNode(unref(Primitive), mergeProps(_ctx.$attrs, {
+					id: unref(rootContext).contentId,
+					ref: unref(forwardRef),
+					"as-child": props.asChild,
+					as: __props.as,
+					hidden: !present ? unref(rootContext).unmountOnHide.value ? "" : "until-found" : void 0,
+					"data-state": skipAnimation.value ? void 0 : unref(rootContext).open.value ? "open" : "closed",
+					"data-disabled": unref(rootContext).disabled?.value ? "" : void 0,
+					style: {
+						[`--reka-collapsible-content-height`]: `${height.value}px`,
+						[`--reka-collapsible-content-width`]: `${width.value}px`
+					}
+				}), {
+					default: withCtx(() => [(unref(rootContext).unmountOnHide.value ? present : true) ? renderSlot(_ctx.$slots, "default", {}, void 0, void 0, 0) : createCommentVNode("v-if", true)]),
+					_: 2
+				}, 1040, [
+					"id",
+					"as-child",
+					"as",
+					"hidden",
+					"data-state",
+					"data-disabled",
+					"style"
+				])]),
+				_: 3
+			}, 8, ["present"]);
+		};
+	}
+});
+// node_modules/reka-ui/dist/Collapsible/CollapsibleTrigger.js
+var CollapsibleTrigger_default = /* @__PURE__ */ defineComponent({
+	__name: "CollapsibleTrigger",
+	props: {
+		asChild: {
+			type: Boolean,
+			required: false
+		},
+		as: {
+			type: null,
+			required: false,
+			default: "button"
+		}
+	},
+	setup(__props) {
+		const props = __props;
+		useForwardExpose();
+		const rootContext = injectCollapsibleRootContext();
+		return (_ctx, _cache) => {
+			return openBlock(), createBlock(unref(Primitive), {
+				type: __props.as === "button" ? "button" : void 0,
+				as: __props.as,
+				"as-child": props.asChild,
+				"aria-controls": unref(rootContext).contentId,
+				"aria-expanded": unref(rootContext).open.value,
+				"data-state": unref(rootContext).open.value ? "open" : "closed",
+				"data-disabled": unref(rootContext).disabled?.value ? "" : void 0,
+				disabled: unref(rootContext).disabled?.value,
+				onClick: unref(rootContext).onOpenToggle
+			}, {
+				default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+				_: 3
+			}, 8, [
+				"type",
+				"as",
+				"as-child",
+				"aria-controls",
+				"aria-expanded",
+				"data-state",
+				"data-disabled",
+				"disabled",
+				"onClick"
+			]);
+		};
+	}
+});
+// node_modules/reka-ui/dist/shared/useSingleOrMultipleValue.js
+/**
+* Validates the props and it makes sure that the types are coherent with each other
+*
+* 1. If type, defaultValue, and modelValue are all undefined, throw an error.
+* 2. If modelValue and defaultValue are defined and not of the same type, throw an error.
+* 3. If type is defined:
+*    a. If type is 'single' and either modelValue or defaultValue is an array, log an error and return 'multiple'.
+*    b. If type is 'multiple' and neither modelValue nor defaultValue is an array, log an error and return 'single'.
+* 4. Return 'multiple' if modelValue is an array, else return 'single'.
+*/
+function validateProps({ type, defaultValue, modelValue }) {
+	const value = modelValue || defaultValue;
+	if (modelValue !== void 0 || defaultValue !== void 0) return Array.isArray(value) ? "multiple" : "single";
+	else return type ?? "single";
+}
+function getDefaultType({ type, defaultValue, modelValue }) {
+	if (type) return type;
+	return validateProps({
+		type,
+		defaultValue,
+		modelValue
+	});
+}
+function getDefaultValue({ type, defaultValue }) {
+	if (defaultValue !== void 0) return defaultValue;
+	return type === "single" ? void 0 : [];
+}
+function useSingleOrMultipleValue(props, emits) {
+	const type = computed(() => getDefaultType(props));
+	const modelValue = useVModel(props, "modelValue", emits, {
+		defaultValue: getDefaultValue(props),
+		passive: props.modelValue === void 0,
+		deep: true
+	});
+	function changeModelValue(value) {
+		if (type.value === "single") modelValue.value = isEqual(value, modelValue.value) ? void 0 : value;
+		else {
+			const modelValueArray = Array.isArray(modelValue.value) ? [...modelValue.value || []] : [modelValue.value].filter(Boolean);
+			if (isValueEqualOrExist(modelValueArray, value)) {
+				const index = modelValueArray.findIndex((i) => isEqual(i, value));
+				modelValueArray.splice(index, 1);
+			} else modelValueArray.push(value);
+			modelValue.value = modelValueArray;
+		}
+	}
+	return {
+		modelValue,
+		changeModelValue,
+		isSingle: computed(() => type.value === "single")
+	};
+}
+// node_modules/reka-ui/dist/Accordion/AccordionRoot.js
+var [injectAccordionRootContext, provideAccordionRootContext] = /*#__PURE__*/ createContext("AccordionRoot");
+var AccordionRoot_default = /* @__PURE__ */ defineComponent({
+	__name: "AccordionRoot",
+	props: {
+		collapsible: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		disabled: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		dir: {
+			type: String,
+			required: false
+		},
+		orientation: {
+			type: String,
+			required: false,
+			default: "vertical"
+		},
+		unmountOnHide: {
+			type: Boolean,
+			required: false,
+			default: true
+		},
+		asChild: {
+			type: Boolean,
+			required: false
+		},
+		as: {
+			type: null,
+			required: false
+		},
+		type: {
+			type: String,
+			required: false
+		},
+		modelValue: {
+			type: null,
+			required: false
+		},
+		defaultValue: {
+			type: null,
+			required: false
+		}
+	},
+	emits: ["update:modelValue"],
+	setup(__props, { emit: __emit }) {
+		const props = __props;
+		const emits = __emit;
+		const { dir, disabled, unmountOnHide } = toRefs(props);
+		const direction = useDirection(dir);
+		const { modelValue, changeModelValue, isSingle } = useSingleOrMultipleValue(props, emits);
+		const { forwardRef, currentElement: parentElement } = useForwardExpose();
+		provideAccordionRootContext({
+			disabled,
+			direction,
+			orientation: props.orientation,
+			parentElement,
+			isSingle,
+			collapsible: props.collapsible,
+			modelValue,
+			changeModelValue,
+			unmountOnHide
+		});
+		return (_ctx, _cache) => {
+			return openBlock(), createBlock(unref(Primitive), {
+				ref: unref(forwardRef),
+				"as-child": __props.asChild,
+				as: __props.as
+			}, {
+				default: withCtx(() => [renderSlot(_ctx.$slots, "default", { modelValue: unref(modelValue) })]),
+				_: 3
+			}, 8, ["as-child", "as"]);
+		};
+	}
+});
+// node_modules/reka-ui/dist/Accordion/AccordionItem.js
+var AccordionItemState = /* @__PURE__ */ function(AccordionItemState$1) {
+	AccordionItemState$1["Open"] = "open";
+	AccordionItemState$1["Closed"] = "closed";
+	return AccordionItemState$1;
+}(AccordionItemState || {});
+var [injectAccordionItemContext, provideAccordionItemContext] = /*#__PURE__*/ createContext("AccordionItem");
+var AccordionItem_default = /* @__PURE__ */ defineComponent({
+	__name: "AccordionItem",
+	props: {
+		disabled: {
+			type: Boolean,
+			required: false
+		},
+		value: {
+			type: String,
+			required: true
+		},
+		unmountOnHide: {
+			type: Boolean,
+			required: false,
+			default: void 0
+		},
+		asChild: {
+			type: Boolean,
+			required: false
+		},
+		as: {
+			type: null,
+			required: false
+		}
+	},
+	setup(__props, { expose: __expose }) {
+		const props = __props;
+		const rootContext = injectAccordionRootContext();
+		const open = computed(() => rootContext.isSingle.value ? props.value === rootContext.modelValue.value : Array.isArray(rootContext.modelValue.value) && rootContext.modelValue.value.includes(props.value));
+		const disabled = computed(() => {
+			return rootContext.disabled.value || props.disabled;
+		});
+		const dataDisabled = computed(() => disabled.value ? "" : void 0);
+		const dataState = computed(() => open.value ? AccordionItemState.Open : AccordionItemState.Closed);
+		__expose({
+			open,
+			dataDisabled
+		});
+		const { currentRef, currentElement } = useForwardExpose();
+		provideAccordionItemContext({
+			open,
+			dataState,
+			disabled,
+			dataDisabled,
+			triggerId: "",
+			currentRef,
+			currentElement,
+			value: computed(() => props.value)
+		});
+		function handleArrowKey(e) {
+			const target = e.target;
+			if (Array.from(rootContext.parentElement.value?.querySelectorAll("[data-reka-collection-item]") ?? []).findIndex((item) => item === target) === -1) return null;
+			useArrowNavigation(e, target, rootContext.parentElement.value, {
+				arrowKeyOptions: rootContext.orientation,
+				dir: rootContext.direction.value,
+				focus: true
+			});
+		}
+		return (_ctx, _cache) => {
+			return openBlock(), createBlock(unref(CollapsibleRoot_default), {
+				"data-orientation": unref(rootContext).orientation,
+				"data-disabled": dataDisabled.value,
+				"data-state": dataState.value,
+				disabled: disabled.value,
+				open: open.value,
+				as: props.as,
+				"as-child": props.asChild,
+				"unmount-on-hide": props.unmountOnHide ?? unref(rootContext).unmountOnHide.value,
+				onKeydown: withKeys(handleArrowKey, [
+					"up",
+					"down",
+					"left",
+					"right",
+					"home",
+					"end"
+				])
+			}, {
+				default: withCtx(() => [renderSlot(_ctx.$slots, "default", { open: open.value })]),
+				_: 3
+			}, 8, [
+				"data-orientation",
+				"data-disabled",
+				"data-state",
+				"disabled",
+				"open",
+				"as",
+				"as-child",
+				"unmount-on-hide"
+			]);
+		};
+	}
+});
+// node_modules/reka-ui/dist/Accordion/AccordionContent.js
+var AccordionContent_default = /* @__PURE__ */ defineComponent({
+	__name: "AccordionContent",
+	props: {
+		forceMount: {
+			type: Boolean,
+			required: false
+		},
+		asChild: {
+			type: Boolean,
+			required: false
+		},
+		as: {
+			type: null,
+			required: false
+		}
+	},
+	setup(__props) {
+		const props = __props;
+		const rootContext = injectAccordionRootContext();
+		const itemContext = injectAccordionItemContext();
+		useForwardExpose();
+		return (_ctx, _cache) => {
+			return openBlock(), createBlock(unref(CollapsibleContent_default), {
+				role: "region",
+				"as-child": props.asChild,
+				as: __props.as,
+				"force-mount": props.forceMount,
+				"aria-labelledby": unref(itemContext).triggerId,
+				"data-state": unref(itemContext).dataState.value,
+				"data-disabled": unref(itemContext).dataDisabled.value,
+				"data-orientation": unref(rootContext).orientation,
+				style: {
+					"--reka-accordion-content-width": "var(--reka-collapsible-content-width)",
+					"--reka-accordion-content-height": "var(--reka-collapsible-content-height)"
+				},
+				onContentFound: _cache[0] || (_cache[0] = ($event) => unref(rootContext).changeModelValue(unref(itemContext).value.value))
+			}, {
+				default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+				_: 3
+			}, 8, [
+				"as-child",
+				"as",
+				"force-mount",
+				"aria-labelledby",
+				"data-state",
+				"data-disabled",
+				"data-orientation"
+			]);
+		};
+	}
+});
+// node_modules/reka-ui/dist/Accordion/AccordionTrigger.js
+var AccordionTrigger_default = /* @__PURE__ */ defineComponent({
+	__name: "AccordionTrigger",
+	props: {
+		asChild: {
+			type: Boolean,
+			required: false
+		},
+		as: {
+			type: null,
+			required: false
+		}
+	},
+	setup(__props) {
+		const props = __props;
+		const rootContext = injectAccordionRootContext();
+		const itemContext = injectAccordionItemContext();
+		itemContext.triggerId ||= useId$1(void 0, "reka-accordion-trigger");
+		function changeItem() {
+			const triggerDisabled = rootContext.isSingle.value && itemContext.open.value && !rootContext.collapsible;
+			if (itemContext.disabled.value || triggerDisabled) return;
+			rootContext.changeModelValue(itemContext.value.value);
+		}
+		return (_ctx, _cache) => {
+			return openBlock(), createBlock(unref(CollapsibleTrigger_default), {
+				id: unref(itemContext).triggerId,
+				ref: unref(itemContext).currentRef,
+				"data-reka-collection-item": "",
+				as: props.as,
+				"as-child": props.asChild,
+				"aria-disabled": unref(itemContext).disabled.value || void 0,
+				"aria-expanded": unref(itemContext).open.value || false,
+				"data-disabled": unref(itemContext).dataDisabled.value,
+				"data-orientation": unref(rootContext).orientation,
+				"data-state": unref(itemContext).dataState.value,
+				disabled: unref(itemContext).disabled.value,
+				onClick: changeItem
+			}, {
+				default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
+				_: 3
+			}, 8, [
+				"id",
+				"as",
+				"as-child",
+				"aria-disabled",
+				"aria-expanded",
+				"data-disabled",
+				"data-orientation",
+				"data-state",
+				"disabled"
+			]);
+		};
+	}
+});
+export { AccordionRoot_default as a, useArrowNavigation as c, injectAccordionItemContext as i, AccordionContent_default as n, injectAccordionRootContext as o, AccordionItem_default as r, useDirection as s, AccordionTrigger_default as t };
+
+//# sourceMappingURL=AccordionTrigger-DAWEZoi3.js.map

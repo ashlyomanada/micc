@@ -1,0 +1,476 @@
+import { a as useComponentProps, b as useAppConfig, t as tv, e as getSlotChildrenText, P as Primitive } from '../virtual/entry.mjs';
+import { a as _sfc_main$5, b as _sfc_main$1 } from './Button-Cwxo7d33.mjs';
+import { u as usePrefix } from './site-BjEVYaKT.mjs';
+import { useSlots, ref, computed, watch, unref, mergeProps, withCtx, createVNode, openBlock, createBlock, createCommentVNode, renderSlot, createTextVNode, toDisplayString, useSSRContext } from 'file:///Users/ccci/Project/node_modules/vue/index.mjs';
+import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrInterpolate } from 'file:///Users/ccci/Project/node_modules/vue/server-renderer/index.mjs';
+import { pausableFilter, useMouseInElement } from 'file:///Users/ccci/Project/node_modules/@vueuse/core/dist/index.js';
+
+var virtual_nuxt__nuxt_2Fui_2Fpage_card_default = {
+  "slots": {
+    "root": "relative flex rounded-lg",
+    "spotlight": "absolute inset-0 rounded-[inherit] pointer-events-none bg-default/90",
+    "container": "relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6",
+    "wrapper": "flex flex-col flex-1 items-start",
+    "header": "mb-4",
+    "body": "flex-1",
+    "footer": "pt-4 mt-auto",
+    "leading": "inline-flex items-center mb-2.5",
+    "leadingIcon": "size-5 shrink-0 text-primary",
+    "title": "text-base text-pretty font-semibold text-highlighted",
+    "description": "text-[15px] text-pretty"
+  },
+  "variants": {
+    "orientation": {
+      "horizontal": { "container": "lg:grid-cols-2 lg:items-center" },
+      "vertical": { "container": "" }
+    },
+    "reverse": { "true": { "wrapper": "order-last" } },
+    "variant": {
+      "solid": {
+        "root": "bg-inverted text-inverted",
+        "title": "text-inverted",
+        "description": "text-dimmed"
+      },
+      "outline": {
+        "root": "bg-default ring ring-default",
+        "description": "text-muted"
+      },
+      "soft": {
+        "root": "bg-elevated/50",
+        "description": "text-toned"
+      },
+      "subtle": {
+        "root": "bg-elevated/50 ring ring-default",
+        "description": "text-toned"
+      },
+      "ghost": { "description": "text-muted" },
+      "naked": {
+        "container": "p-0 sm:p-0",
+        "description": "text-muted"
+      }
+    },
+    "to": { "true": { "root": ["outline-primary/25 has-[>a:focus-visible]:outline-3", "transition"] } },
+    "title": { "true": { "description": "mt-1" } },
+    "highlight": { "true": { "root": "ring-2" } },
+    "highlightColor": {
+      "primary": "",
+      "secondary": "",
+      "success": "",
+      "info": "",
+      "warning": "",
+      "error": "",
+      "neutral": ""
+    },
+    "spotlight": { "true": { "root": "[--spotlight-size:400px] before:absolute before:-inset-px before:pointer-events-none before:rounded-[inherit] before:bg-[radial-gradient(var(--spotlight-size)_var(--spotlight-size)_at_calc(var(--spotlight-x,0px))_calc(var(--spotlight-y,0px)),var(--spotlight-color),transparent_70%)]" } },
+    "spotlightColor": {
+      "primary": "",
+      "secondary": "",
+      "success": "",
+      "info": "",
+      "warning": "",
+      "error": "",
+      "neutral": ""
+    }
+  },
+  "compoundVariants": [
+    {
+      "variant": "solid",
+      "to": true,
+      "class": { "root": "hover:bg-inverted/90" }
+    },
+    {
+      "variant": "outline",
+      "to": true,
+      "class": { "root": "hover:bg-elevated/50" }
+    },
+    {
+      "variant": "soft",
+      "to": true,
+      "class": { "root": "hover:bg-elevated" }
+    },
+    {
+      "variant": "subtle",
+      "to": true,
+      "class": { "root": "hover:bg-elevated" }
+    },
+    {
+      "variant": "subtle",
+      "to": true,
+      "highlight": false,
+      "class": { "root": "hover:ring-accented" }
+    },
+    {
+      "variant": ["outline", "subtle"],
+      "to": true,
+      "highlight": false,
+      "class": { "root": "has-[>a:focus-visible]:ring-primary" }
+    },
+    {
+      "variant": "ghost",
+      "to": true,
+      "class": { "root": "hover:bg-elevated/50" }
+    },
+    {
+      "highlightColor": "primary",
+      "highlight": true,
+      "class": { "root": "ring-primary" }
+    },
+    {
+      "highlightColor": "secondary",
+      "highlight": true,
+      "class": { "root": "ring-secondary" }
+    },
+    {
+      "highlightColor": "success",
+      "highlight": true,
+      "class": { "root": "ring-success" }
+    },
+    {
+      "highlightColor": "info",
+      "highlight": true,
+      "class": { "root": "ring-info" }
+    },
+    {
+      "highlightColor": "warning",
+      "highlight": true,
+      "class": { "root": "ring-warning" }
+    },
+    {
+      "highlightColor": "error",
+      "highlight": true,
+      "class": { "root": "ring-error" }
+    },
+    {
+      "highlightColor": "neutral",
+      "highlight": true,
+      "class": { "root": "ring-inverted" }
+    },
+    {
+      "spotlightColor": "primary",
+      "spotlight": true,
+      "class": { "root": "[--spotlight-color:var(--ui-primary)]" }
+    },
+    {
+      "spotlightColor": "secondary",
+      "spotlight": true,
+      "class": { "root": "[--spotlight-color:var(--ui-secondary)]" }
+    },
+    {
+      "spotlightColor": "success",
+      "spotlight": true,
+      "class": { "root": "[--spotlight-color:var(--ui-success)]" }
+    },
+    {
+      "spotlightColor": "info",
+      "spotlight": true,
+      "class": { "root": "[--spotlight-color:var(--ui-info)]" }
+    },
+    {
+      "spotlightColor": "warning",
+      "spotlight": true,
+      "class": { "root": "[--spotlight-color:var(--ui-warning)]" }
+    },
+    {
+      "spotlightColor": "error",
+      "spotlight": true,
+      "class": { "root": "[--spotlight-color:var(--ui-error)]" }
+    },
+    {
+      "spotlightColor": "neutral",
+      "spotlight": true,
+      "class": { "root": "[--spotlight-color:var(--ui-bg-inverted)]" }
+    }
+  ],
+  "defaultVariants": {
+    "variant": "outline",
+    "highlightColor": "primary",
+    "spotlightColor": "primary"
+  }
+};
+var _sfc_main = /* @__PURE__ */ Object.assign({ inheritAttrs: false }, {
+  __name: "UPageCard",
+  __ssrInlineRender: true,
+  props: {
+    as: {
+      type: null,
+      required: false
+    },
+    icon: {
+      type: null,
+      required: false
+    },
+    title: {
+      type: String,
+      required: false
+    },
+    description: {
+      type: String,
+      required: false
+    },
+    orientation: {
+      type: null,
+      required: false,
+      default: "vertical"
+    },
+    reverse: {
+      type: Boolean,
+      required: false
+    },
+    highlight: {
+      type: Boolean,
+      required: false
+    },
+    highlightColor: {
+      type: null,
+      required: false
+    },
+    spotlight: {
+      type: Boolean,
+      required: false
+    },
+    spotlightColor: {
+      type: null,
+      required: false
+    },
+    variant: {
+      type: null,
+      required: false
+    },
+    to: {
+      type: null,
+      required: false
+    },
+    target: {
+      type: [
+        String,
+        Object,
+        null
+      ],
+      required: false
+    },
+    onClick: {
+      type: Function,
+      required: false
+    },
+    class: {
+      type: null,
+      required: false
+    },
+    ui: {
+      type: Object,
+      required: false
+    }
+  },
+  setup(__props) {
+    const _props = __props;
+    const slots = useSlots();
+    const props = useComponentProps("pageCard", _props);
+    const cardRef = ref();
+    const motionControl = pausableFilter();
+    const appConfig = useAppConfig();
+    const { elementX, elementY } = useMouseInElement(cardRef, { eventFilter: motionControl.eventFilter });
+    const prefix = usePrefix();
+    const spotlight = computed(() => props.spotlight && (elementX.value !== 0 || elementY.value !== 0));
+    watch(() => props.spotlight, (value) => {
+      if (value) motionControl.resume();
+      else motionControl.pause();
+    }, { immediate: true });
+    const ui = computed(() => {
+      var _a;
+      return tv({
+        extend: virtual_nuxt__nuxt_2Fui_2Fpage_card_default,
+        ...((_a = appConfig.ui) == null ? void 0 : _a.pageCard) || {}
+      })({
+        orientation: props.orientation,
+        reverse: props.reverse,
+        variant: props.variant,
+        to: !!props.to || !!props.onClick,
+        title: !!props.title || !!slots.title,
+        highlight: props.highlight,
+        highlightColor: props.highlightColor,
+        spotlight: spotlight.value,
+        spotlightColor: props.spotlightColor
+      });
+    });
+    const ariaLabel = computed(() => {
+      return (slots.title && getSlotChildrenText(slots.title()) || props.title || "Card link").trim();
+    });
+    return (_ctx, _push, _parent, _attrs) => {
+      var _a, _b;
+      _push(ssrRenderComponent(unref(Primitive), mergeProps({
+        ref_key: "cardRef",
+        ref: cardRef,
+        as: unref(props).as
+      }, !unref(props).to ? _ctx.$attrs : {}, {
+        "data-orientation": unref(props).orientation,
+        "data-slot": (_a = _ctx.$attrs["data-slot"]) != null ? _a : "root",
+        class: ui.value.root({ class: [(_b = unref(props).ui) == null ? void 0 : _b.root, unref(props).class] }),
+        style: spotlight.value && {
+          "--spotlight-x": `${unref(elementX)}px`,
+          "--spotlight-y": `${unref(elementY)}px`
+        },
+        onClick: unref(props).onClick
+      }, _attrs), {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          var _a2, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n;
+          if (_push2) {
+            if (unref(props).spotlight) _push2(`<div data-slot="spotlight" class="${ssrRenderClass(ui.value.spotlight({ class: (_a2 = unref(props).ui) == null ? void 0 : _a2.spotlight }))}"${_scopeId}></div>`);
+            else _push2(`<!---->`);
+            _push2(`<div data-slot="container" class="${ssrRenderClass(ui.value.container({ class: (_b2 = unref(props).ui) == null ? void 0 : _b2.container }))}"${_scopeId}>`);
+            if (!!slots.header || unref(props).icon || !!slots.leading || !!slots.body || unref(props).title || !!slots.title || unref(props).description || !!slots.description || !!slots.footer) {
+              _push2(`<div data-slot="wrapper" class="${ssrRenderClass(ui.value.wrapper({ class: (_c = unref(props).ui) == null ? void 0 : _c.wrapper }))}"${_scopeId}>`);
+              if (!!slots.header) {
+                _push2(`<div data-slot="header" class="${ssrRenderClass(ui.value.header({ class: (_d = unref(props).ui) == null ? void 0 : _d.header }))}"${_scopeId}>`);
+                ssrRenderSlot(_ctx.$slots, "header", {}, null, _push2, _parent2, _scopeId);
+                _push2(`</div>`);
+              } else _push2(`<!---->`);
+              if (unref(props).icon || !!slots.leading) {
+                _push2(`<div data-slot="leading" class="${ssrRenderClass(ui.value.leading({ class: (_e = unref(props).ui) == null ? void 0 : _e.leading }))}"${_scopeId}>`);
+                ssrRenderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => {
+                  var _a3;
+                  if (unref(props).icon) _push2(ssrRenderComponent(_sfc_main$5, {
+                    name: unref(props).icon,
+                    "data-slot": "leadingIcon",
+                    class: ui.value.leadingIcon({ class: (_a3 = unref(props).ui) == null ? void 0 : _a3.leadingIcon })
+                  }, null, _parent2, _scopeId));
+                  else _push2(`<!---->`);
+                }, _push2, _parent2, _scopeId);
+                _push2(`</div>`);
+              } else _push2(`<!---->`);
+              if (!!slots.body || unref(props).title || !!slots.title || unref(props).description || !!slots.description) {
+                _push2(`<div data-slot="body" class="${ssrRenderClass(ui.value.body({ class: (_f = unref(props).ui) == null ? void 0 : _f.body }))}"${_scopeId}>`);
+                ssrRenderSlot(_ctx.$slots, "body", {}, () => {
+                  var _a3, _b3;
+                  if (unref(props).title || !!slots.title) {
+                    _push2(`<div data-slot="title" class="${ssrRenderClass(ui.value.title({ class: (_a3 = unref(props).ui) == null ? void 0 : _a3.title }))}"${_scopeId}>`);
+                    ssrRenderSlot(_ctx.$slots, "title", {}, () => {
+                      _push2(`${ssrInterpolate(unref(props).title)}`);
+                    }, _push2, _parent2, _scopeId);
+                    _push2(`</div>`);
+                  } else _push2(`<!---->`);
+                  if (unref(props).description || !!slots.description) {
+                    _push2(`<div data-slot="description" class="${ssrRenderClass(ui.value.description({ class: (_b3 = unref(props).ui) == null ? void 0 : _b3.description }))}"${_scopeId}>`);
+                    ssrRenderSlot(_ctx.$slots, "description", {}, () => {
+                      _push2(`${ssrInterpolate(unref(props).description)}`);
+                    }, _push2, _parent2, _scopeId);
+                    _push2(`</div>`);
+                  } else _push2(`<!---->`);
+                }, _push2, _parent2, _scopeId);
+                _push2(`</div>`);
+              } else _push2(`<!---->`);
+              if (!!slots.footer) {
+                _push2(`<div data-slot="footer" class="${ssrRenderClass(ui.value.footer({ class: (_g = unref(props).ui) == null ? void 0 : _g.footer }))}"${_scopeId}>`);
+                ssrRenderSlot(_ctx.$slots, "footer", {}, null, _push2, _parent2, _scopeId);
+                _push2(`</div>`);
+              } else _push2(`<!---->`);
+              _push2(`</div>`);
+            } else _push2(`<!---->`);
+            ssrRenderSlot(_ctx.$slots, "default", {}, null, _push2, _parent2, _scopeId);
+            _push2(`</div>`);
+            if (unref(props).to) _push2(ssrRenderComponent(_sfc_main$1, mergeProps({ "aria-label": ariaLabel.value }, {
+              "to": unref(props).to,
+              "target": unref(props).target,
+              ..._ctx.$attrs,
+              "data-slot": void 0
+            }, {
+              class: unref(prefix)("focus:outline-none peer"),
+              raw: ""
+            }), {
+              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                if (_push3) _push3(`<span class="${ssrRenderClass(unref(prefix)("absolute inset-0"))}" aria-hidden="true"${_scopeId2}></span>`);
+                else return [createVNode("span", {
+                  class: unref(prefix)("absolute inset-0"),
+                  "aria-hidden": "true"
+                }, null, 2)];
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+            else _push2(`<!---->`);
+          } else return [
+            unref(props).spotlight ? (openBlock(), createBlock("div", {
+              key: 0,
+              "data-slot": "spotlight",
+              class: ui.value.spotlight({ class: (_h = unref(props).ui) == null ? void 0 : _h.spotlight })
+            }, null, 2)) : createCommentVNode("", true),
+            createVNode("div", {
+              "data-slot": "container",
+              class: ui.value.container({ class: (_i = unref(props).ui) == null ? void 0 : _i.container })
+            }, [!!slots.header || unref(props).icon || !!slots.leading || !!slots.body || unref(props).title || !!slots.title || unref(props).description || !!slots.description || !!slots.footer ? (openBlock(), createBlock("div", {
+              key: 0,
+              "data-slot": "wrapper",
+              class: ui.value.wrapper({ class: (_j = unref(props).ui) == null ? void 0 : _j.wrapper })
+            }, [
+              !!slots.header ? (openBlock(), createBlock("div", {
+                key: 0,
+                "data-slot": "header",
+                class: ui.value.header({ class: (_k = unref(props).ui) == null ? void 0 : _k.header })
+              }, [renderSlot(_ctx.$slots, "header")], 2)) : createCommentVNode("", true),
+              unref(props).icon || !!slots.leading ? (openBlock(), createBlock("div", {
+                key: 1,
+                "data-slot": "leading",
+                class: ui.value.leading({ class: (_l = unref(props).ui) == null ? void 0 : _l.leading })
+              }, [renderSlot(_ctx.$slots, "leading", { ui: ui.value }, () => {
+                var _a3;
+                return [unref(props).icon ? (openBlock(), createBlock(_sfc_main$5, {
+                  key: 0,
+                  name: unref(props).icon,
+                  "data-slot": "leadingIcon",
+                  class: ui.value.leadingIcon({ class: (_a3 = unref(props).ui) == null ? void 0 : _a3.leadingIcon })
+                }, null, 8, ["name", "class"])) : createCommentVNode("", true)];
+              })], 2)) : createCommentVNode("", true),
+              !!slots.body || unref(props).title || !!slots.title || unref(props).description || !!slots.description ? (openBlock(), createBlock("div", {
+                key: 2,
+                "data-slot": "body",
+                class: ui.value.body({ class: (_m = unref(props).ui) == null ? void 0 : _m.body })
+              }, [renderSlot(_ctx.$slots, "body", {}, () => {
+                var _a3, _b3;
+                return [unref(props).title || !!slots.title ? (openBlock(), createBlock("div", {
+                  key: 0,
+                  "data-slot": "title",
+                  class: ui.value.title({ class: (_a3 = unref(props).ui) == null ? void 0 : _a3.title })
+                }, [renderSlot(_ctx.$slots, "title", {}, () => [createTextVNode(toDisplayString(unref(props).title), 1)])], 2)) : createCommentVNode("", true), unref(props).description || !!slots.description ? (openBlock(), createBlock("div", {
+                  key: 1,
+                  "data-slot": "description",
+                  class: ui.value.description({ class: (_b3 = unref(props).ui) == null ? void 0 : _b3.description })
+                }, [renderSlot(_ctx.$slots, "description", {}, () => [createTextVNode(toDisplayString(unref(props).description), 1)])], 2)) : createCommentVNode("", true)];
+              })], 2)) : createCommentVNode("", true),
+              !!slots.footer ? (openBlock(), createBlock("div", {
+                key: 3,
+                "data-slot": "footer",
+                class: ui.value.footer({ class: (_n = unref(props).ui) == null ? void 0 : _n.footer })
+              }, [renderSlot(_ctx.$slots, "footer")], 2)) : createCommentVNode("", true)
+            ], 2)) : createCommentVNode("", true), renderSlot(_ctx.$slots, "default")], 2),
+            unref(props).to ? (openBlock(), createBlock(_sfc_main$1, mergeProps({
+              key: 1,
+              "aria-label": ariaLabel.value
+            }, {
+              "to": unref(props).to,
+              "target": unref(props).target,
+              ..._ctx.$attrs,
+              "data-slot": void 0
+            }, {
+              class: unref(prefix)("focus:outline-none peer"),
+              raw: ""
+            }), {
+              default: withCtx(() => [createVNode("span", {
+                class: unref(prefix)("absolute inset-0"),
+                "aria-hidden": "true"
+              }, null, 2)]),
+              _: 1
+            }, 16, ["aria-label", "class"])) : createCommentVNode("", true)
+          ];
+        }),
+        _: 3
+      }, _parent));
+    };
+  }
+});
+var _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/PageCard.vue");
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
+};
+
+export { _sfc_main as _ };
+//# sourceMappingURL=PageCard-bdsePQLp.mjs.map
